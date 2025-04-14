@@ -17,8 +17,6 @@ public class Plan {
     @JoinColumn(name = "fk_obra_social")
     private ObraSocial obraSocial;
 
-    @OneToMany(mappedBy = "plan", cascade = CascadeType.ALL)
-    private List<Afiliacion> afiliaciones;
 
     // Getters y setters
 
@@ -44,13 +42,5 @@ public class Plan {
 
     public void setObraSocial(ObraSocial obraSocial) {
         this.obraSocial = obraSocial;
-    }
-
-    public List<Afiliacion> getAfiliaciones() {
-        return afiliaciones;
-    }
-
-    public void setAfiliaciones(List<Afiliacion> afiliaciones) {
-        this.afiliaciones = afiliaciones;
     }
 }
