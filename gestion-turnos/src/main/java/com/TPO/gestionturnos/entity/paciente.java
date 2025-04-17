@@ -24,6 +24,14 @@ public class Paciente {
 
     // Getters y setters
 
+    public Paciente(String nombre2, String apellido2, String mail2, String contrasenaHash) {
+        //TODO Auto-generated constructor stub
+    }
+
+    public Paciente(Long id2, String nombre2, String apellido2, String mail2, String encode) {
+        //TODO Auto-generated constructor stub
+    }
+
     public Long getId() {
         return id;
     }
