@@ -78,4 +78,12 @@ public class PacienteServiceImpl implements PacienteService {
     }
 
 
+    @Override
+    public void deletePaciente(Long id) throws PacienteInexistenteException {
+        // TODO Auto-generated method stub
+        // hacer funcion
+        throw new UnsupportedOperationException("Unimplemented method 'deletePaciente'");
+    }
+
+
 }

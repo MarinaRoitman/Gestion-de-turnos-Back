@@ -1,14 +1,16 @@
+CREATE DATABASE IF NOT EXISTS turnito;
+
 USE turnito;
 
 -- Tabla Especialidad
 CREATE TABLE Especialidad (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre TEXT NOT NULL
 );
 
 -- Tabla Profesional
 CREATE TABLE Profesional (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
     mail TEXT NOT NULL,
@@ -17,16 +19,16 @@ CREATE TABLE Profesional (
 
 -- Tabla intermedia Profesional_Especialidad
 CREATE TABLE Profesional_Especialidad (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    fkProfesional INT NOT NULL,
-    fkEspecialidad INT NOT NULL,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    fkProfesional BIGINT NOT NULL,
+    fkEspecialidad BIGINT NOT NULL,
     FOREIGN KEY (fkProfesional) REFERENCES Profesional(id),
     FOREIGN KEY (fkEspecialidad) REFERENCES Especialidad(id)
 );
 
 -- Tabla Paciente
 CREATE TABLE Paciente (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
     mail TEXT
@@ -36,16 +38,16 @@ CREATE TABLE Paciente (
 
 -- Tabla Estado
 CREATE TABLE Estado (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     etiqueta ENUM('Cancelado', 'Cumplido', 'Reservado', 'Disponible') NOT NULL
 );
 
 -- Tabla Turno
 CREATE TABLE Turno (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    fkPaciente INT NOT NULL,
-    fkProfesional INT NOT NULL,
-    fkEstado INT NOT NULL,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    fkPaciente BIGINT NOT NULL,
+    fkProfesional BIGINT NOT NULL,
+    fkEstado BIGINT NOT NULL,
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
     notas TEXT,
@@ -56,24 +58,24 @@ CREATE TABLE Turno (
 
 -- Tabla Obra Social
 CREATE TABLE ObraSocial (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre TEXT NOT NULL
 );
 
 -- Tabla Plan
 CREATE TABLE Plan (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre TEXT NOT NULL,
-    fkObraSocial INT NOT NULL,
+    fkObraSocial BIGINT NOT NULL,
     FOREIGN KEY (fkObraSocial) REFERENCES ObraSocial(id)
 );
 
 -- Tabla Afiliacion
 CREATE TABLE Afiliacion (
-    id INT AUTO_INCREMENT PRIMARY KEY,
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nroAfiliado TEXT NOT NULL,
-    fkObraSocial INT NOT NULL,
-    fkPaciente INT NOT NULL,
+    fkObraSocial BIGINT NOT NULL,
+    fkPaciente BIGINT NOT NULL,
     fechaAlta DATE NOT NULL,
     fechaFin DATE,
     FOREIGN KEY (fkObraSocial) REFERENCES ObraSocial(id),

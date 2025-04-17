@@ -6,6 +6,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -13,6 +14,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.TPO.gestionturnos.entity.Paciente;
+import com.TPO.gestionturnos.entity.DTOs.EliminarPacienteRequest;
 import com.TPO.gestionturnos.entity.DTOs.LoginPacienteRequest;
 import com.TPO.gestionturnos.entity.DTOs.ModificarPacienteRequest;
 import com.TPO.gestionturnos.entity.DTOs.NuevoPacienteRequest;
@@ -26,7 +28,7 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 
 @RestController
 @RequestMapping("/pacientes")
-public class PacientesController {
+public class pacienteController {
 
     @Autowired
     private PacienteService pacienteService;
@@ -79,5 +81,11 @@ public class PacientesController {
     public ResponseEntity<Object> modifyPaciente(@RequestBody ModificarPacienteRequest pacienteRequest) throws PacienteInexistenteException{
         Paciente result = pacienteService.modifyPaciente(pacienteRequest.getId(), pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
+    }
+
+    @Operation(summary = "Eliminar un paciente", description = "Elimina un paciente según el ID proporcionado. Si no existe el paciente, lanza una excepción.")
+    @DeleteMapping
+    public void deletePaciente(@RequestBody EliminarPacienteRequest pacienteRequest) throws PacienteInexistenteException{
+        // hacer funcion
     }
 }

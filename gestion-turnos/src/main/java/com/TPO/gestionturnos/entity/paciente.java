@@ -11,9 +11,16 @@ public class Paciente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private String apellido;
+
+    @Column(nullable = false, unique = true)
     private String mail;
+
+    @Column(nullable = false)
     private String password;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
@@ -22,15 +29,27 @@ public class Paciente {
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Turno> turnos;
 
+    // Constructor por defecto requerido por JPA
+    public Paciente() {}
+
+    // Constructor personalizado
+    public Paciente(String nombre, String apellido, String mail, String password) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.password = password;
+    }
+
+    // Otro constructor opcional si lo necesitás
+    public Paciente(Long id, String nombre, String apellido, String mail, String password) {
+        this.id = id;
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.mail = mail;
+        this.password = password;
+    }
+
     // Getters y setters
-
-    public Paciente(String nombre2, String apellido2, String mail2, String contrasenaHash) {
-        //TODO Auto-generated constructor stub
-    }
-
-    public Paciente(Long id2, String nombre2, String apellido2, String mail2, String encode) {
-        //TODO Auto-generated constructor stub
-    }
 
     public Long getId() {
         return id;
