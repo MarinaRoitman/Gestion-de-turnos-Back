@@ -50,9 +50,9 @@ public class pacienteController {
     }
 
     @Operation(summary = "Listar pacientes por email", description = "Devuelve el paciente cuyo email sea el ingresado.")
-    @GetMapping("/mail/{pacientemail}")
-    public ResponseEntity<Paciente> getPacienteByMail(@PathVariable String pacientemail) throws PacienteInexistenteException {
-        Optional<Paciente> result = pacienteService.getPacienteByMail(pacientemail);
+    @GetMapping("/mail/{pacienteMail}")
+    public ResponseEntity<Paciente> getPacienteByMail(@PathVariable String pacienteMail) throws PacienteInexistenteException {
+        Optional<Paciente> result = pacienteService.getPacienteByMail(pacienteMail);
         if (result.isPresent())
             return ResponseEntity.ok(result.get());
 
@@ -77,14 +77,14 @@ public class pacienteController {
 
     // hacer que este metodo sea privado
     @Operation(summary = "Modificar un paciente", description = "Modifica los datos de un paciente ya registrado (nombre, apellido, mail y/o contraseña) según el ID proporcionado. Si no existe el paciente, lanza una excepción.")
-    @PutMapping
+    @PutMapping("/{pacienteId}")
     public ResponseEntity<Object> modifyPaciente(@RequestBody ModificarPacienteRequest pacienteRequest) throws PacienteInexistenteException{
         Paciente result = pacienteService.modifyPaciente(pacienteRequest.getId(), pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
     }
 
     @Operation(summary = "Eliminar un paciente", description = "Elimina un paciente según el ID proporcionado. Si no existe el paciente, lanza una excepción.")
-    @DeleteMapping
+    @DeleteMapping("/{pacienteId}")
     public void deletePaciente(@RequestBody EliminarPacienteRequest pacienteRequest) throws PacienteInexistenteException{
         // hacer funcion
     }
