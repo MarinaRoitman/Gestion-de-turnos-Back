@@ -17,6 +17,7 @@ import com.TPO.gestionturnos.entity.Paciente;
 import com.TPO.gestionturnos.entity.DTOs.EliminarPacienteRequest;
 import com.TPO.gestionturnos.entity.DTOs.LoginPacienteRequest;
 import com.TPO.gestionturnos.entity.DTOs.ModificarPacienteRequest;
+import com.TPO.gestionturnos.entity.DTOs.ModificarPasswordRequest;
 import com.TPO.gestionturnos.entity.DTOs.NuevoPacienteRequest;
 import com.TPO.gestionturnos.exceptions.PacienteExistenteException;
 import com.TPO.gestionturnos.exceptions.PacienteInexistenteException;
@@ -82,7 +83,15 @@ public class pacienteController {
         Paciente result = pacienteService.modifyPaciente(pacienteRequest.getId(), pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
     }
-
+    
+    @Operation(summary = "Recuperar contraseña de un paciente", description = "Recibe el mail del usuario y lanza  una exceción si el mail no está registrado.")
+    @PutMapping("recupero/{pacienteMail}")
+    public ResponseEntity<Object> recoverPassword(@RequestBody ModificarPasswordRequest passwordRequest) throws PacienteInexistenteException{
+        // hacer funcion
+        Paciente result = pacienteService.recoverPassword(passwordRequest.getMail());
+        return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
+    }
+    
     @Operation(summary = "Eliminar un paciente", description = "Elimina un paciente según el ID proporcionado. Si no existe el paciente, lanza una excepción.")
     @DeleteMapping("/{pacienteId}")
     public void deletePaciente(@RequestBody EliminarPacienteRequest pacienteRequest) throws PacienteInexistenteException{

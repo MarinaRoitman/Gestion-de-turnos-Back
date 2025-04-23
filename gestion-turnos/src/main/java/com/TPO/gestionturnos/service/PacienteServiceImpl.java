@@ -41,12 +41,13 @@ public class PacienteServiceImpl implements PacienteService {
         
     @Override
     public Paciente modifyPaciente(Long id, String nombre, String apellido, String mail, String password) throws PacienteInexistenteException {
-        mail = mail.toLowerCase();
-        Optional<Paciente> paciente = pacienteRepository.findByMail(mail);
+        // mail = mail.toLowerCase();
+        // Optional<Paciente> paciente = pacienteRepository.findByMail(mail);
         
-        if (!paciente.isEmpty())
-            return pacienteRepository.save(new Paciente(id, nombre, apellido, mail, password));
-        throw new PacienteInexistenteException();
+        // if (!paciente.isEmpty())
+        //     return pacienteRepository.save(new Paciente(id, nombre, apellido, mail, password));
+        // throw new PacienteInexistenteException();
+        return null;
     }
 
     @Override
@@ -86,4 +87,10 @@ public class PacienteServiceImpl implements PacienteService {
     }
 
 
+    @Override
+    public Paciente recoverPassword(String mail) throws PacienteInexistenteException {
+        // TODO Auto-generated method stub
+        // hacer funcion
+        throw new UnsupportedOperationException("Unimplemented method 'recoverPassword'");
+    }
 }

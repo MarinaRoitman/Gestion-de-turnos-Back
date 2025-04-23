@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.TPO.gestionturnos.entity.Especialidad;
 import com.TPO.gestionturnos.entity.Profesional;
 import com.TPO.gestionturnos.entity.DTOs.EliminarProfesionalRequest;
 import com.TPO.gestionturnos.entity.DTOs.ModificarCrearProfesionalRequest;

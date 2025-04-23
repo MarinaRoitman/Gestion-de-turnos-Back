@@ -3,6 +3,8 @@ package com.TPO.gestionturnos.entity;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "turno")
@@ -30,6 +32,9 @@ public class Turno {
     @ManyToOne
     @JoinColumn(name = "fk_afiliacion")
     private Afiliacion afiliacion;
+
+    @OneToMany(mappedBy = "turno", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Imagen> imagenes = new ArrayList<>();
 
     // Getters y setters
 
@@ -87,5 +92,13 @@ public class Turno {
 
     public void setAfiliacion(Afiliacion afiliacion) {
         this.afiliacion = afiliacion;
+    }
+
+    public List<Imagen> getImagenes() {
+        return imagenes;
+    }
+
+    public void setImagenes(List<Imagen> imagenes) {
+        this.imagenes = imagenes;
     }
 }

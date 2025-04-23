@@ -39,32 +39,19 @@ public class turnoController {
         return null;
     }
 
-    // listar turnos desde fecha
+    @Operation(summary = "Listar turnos con fecha igual a la ingresada", description = "Devuelve turnos cuya fecha sea la ingresada")
+    @GetMapping("fecha/{fecha}")
+    public ResponseEntity<List<Turno>> getTurnosPorFecha(@PathVariable LocalDate fecha) {
+        // Optional<Paciente> result = pacienteService.getPacienteById(especialidadId);
+        // if (result.isPresent())
+        //     return ResponseEntity.ok(result.get());
+        // return ResponseEntity.noContent().build();
+        return null;
+    }
+
     @Operation(summary = "Listar turnos con fecha mayor a la ingresada", description = "Devuelve turnos cuya fecha sea mayor a la ingresada")
     @GetMapping("desde/{fecha}")
-    public ResponseEntity<List<Turno>> getTurnosMayorFecha(@PathVariable LocalDate fechaInicio) {
-        // Optional<Paciente> result = pacienteService.getPacienteById(especialidadId);
-        // if (result.isPresent())
-        //     return ResponseEntity.ok(result.get());
-        // return ResponseEntity.noContent().build();
-        return null;
-    }
-
-    // listar turnos hasta fecha
-    @Operation(summary = "Listar turnos con fecha menor a la ingresada", description = "Devuelve turnos cuya fecha sea menor a la ingresada")
-    @GetMapping("hasta/{fecha}")
-    public ResponseEntity<List<Turno>> getTurnosMenorFecha(@PathVariable LocalDate fecha) {
-        // Optional<Paciente> result = pacienteService.getPacienteById(especialidadId);
-        // if (result.isPresent())
-        //     return ResponseEntity.ok(result.get());
-        // return ResponseEntity.noContent().build();
-        return null;
-    }
-
-    // listar turnos entre fechas
-    @Operation(summary = "Listar turnos con fecha entre las ingresadas", description = "Devuelve turnos cuya fecha este entre las fechas ingresadas")
-    @GetMapping("hasta/{fechaInicio}/{fechaFin}")
-    public ResponseEntity<List<Turno>> getTurnosEntreFechas(@PathVariable LocalDate fechaInicio, @PathVariable LocalDate fechaFin) {
+    public ResponseEntity<List<Turno>> getTurnosMayorFecha(@PathVariable LocalDate fecha) {
         // Optional<Paciente> result = pacienteService.getPacienteById(especialidadId);
         // if (result.isPresent())
         //     return ResponseEntity.ok(result.get());
@@ -84,7 +71,7 @@ public class turnoController {
     }
 
     // listar turnos por paciente
-    @Operation(summary = "Listar turnos por estado", description = "Devuelve los turnos de un paciente")
+    @Operation(summary = "Listar turnos por paciente", description = "Devuelve los turnos de un paciente")
     @GetMapping("paciente/{pacienteId}")
     public ResponseEntity<List<Turno>> getTurnosByPaciente(@PathVariable Long pacienteId) {
         // Optional<Paciente> result = pacienteService.getPacienteById(especialidadId);

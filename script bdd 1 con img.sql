@@ -56,6 +56,14 @@ CREATE TABLE Turno (
     FOREIGN KEY (fkEstado) REFERENCES Estado(id)
 );
 
+CREATE TABLE Imagen (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    fkTurno BIGINT NOT NULL,
+    titulo TEXT,
+    imagen longblob,
+    FOREIGN KEY (fkTurno) REFERENCES Turno(id) ON DELETE CASCADE
+);
+
 -- Tabla Obra Social
 CREATE TABLE ObraSocial (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,

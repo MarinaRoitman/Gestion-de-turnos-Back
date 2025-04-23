@@ -16,6 +16,8 @@ public interface PacienteService {
 
     public Paciente modifyPaciente(Long id, String nombre, String apellido, String mail, String password) throws PacienteInexistenteException;
 
+    public Paciente recoverPassword(String mail) throws PacienteInexistenteException;
+
     public Optional <Paciente> getPacienteById(Long id) throws PacienteInexistenteException;
 
     public Optional <Paciente> getPacienteByMail(String mail) throws PacienteInexistenteException;

@@ -1,0 +1,14 @@
+{
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Spring Boot-GestionDeTurnosApplication<gestion-turnos>",
+            "request": "launch",
+            "cwd": "${workspaceFolder}",
+            "mainClass": "com.TPO.gestionturnos.GestionDeTurnosApplication",
+            "projectName": "gestion-turnos",
+            "args": "",
+            "envFile": "${workspaceFolder}/.env"
+        }
+    ]
+}
