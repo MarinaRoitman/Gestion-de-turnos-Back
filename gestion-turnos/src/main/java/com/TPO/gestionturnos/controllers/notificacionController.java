@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.TPO.gestionturnos.entity.Notificacion;
 import com.TPO.gestionturnos.entity.DTOs.EliminarNotificacionRequest;
-import com.TPO.gestionturnos.entity.DTOs.EliminarPacienteRequest;
 import com.TPO.gestionturnos.entity.DTOs.ModificarNotificacionRequest;
 import com.TPO.gestionturnos.entity.DTOs.NuevaNotificacionRequest;
 import com.TPO.gestionturnos.exceptions.NotificacionInexistenteException;

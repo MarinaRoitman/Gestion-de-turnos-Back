@@ -20,13 +20,13 @@ public class Paciente {
     @Column(nullable = false, unique = true)
     private String mail;
 
-    @Column(nullable = false)
+    @Column(name = "contrasena", nullable = false)
     private String password;
 
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Afiliacion> afiliaciones;
 
-    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<Turno> turnos;
 
     // Constructor por defecto requerido por JPA

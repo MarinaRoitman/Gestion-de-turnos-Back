@@ -3,7 +3,6 @@ package com.TPO.gestionturnos.controllers;
 import com.TPO.gestionturnos.entity.Imagen;
 import com.TPO.gestionturnos.entity.DTOs.EliminarImagenRequest;
 import com.TPO.gestionturnos.entity.DTOs.ModificarCrearImagenRequest;
-import com.TPO.gestionturnos.entity.DTOs.ModificarCrearTurnoRequest;
 import com.TPO.gestionturnos.exceptions.ImagenInexistenteException;
 import com.TPO.gestionturnos.exceptions.TurnoInexistenteException;
 

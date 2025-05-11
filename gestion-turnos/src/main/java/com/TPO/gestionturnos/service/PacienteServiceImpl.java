@@ -28,11 +28,14 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Override
     public Paciente createPaciente(String nombre, String apellido, String mail, String password) throws PacienteExistenteException {
+        if (mail == null || mail.trim().isEmpty()) {
+            throw new IllegalArgumentException("El correo electrónico no puede ser nulo o vacío");
+        }
         mail = mail.toLowerCase();
 
         Optional<Paciente> pacienteExistente = pacienteRepository.findByMail(mail);
         if (pacienteExistente.isPresent()) {
-            throw new PacienteExistenteException();
+            throw new PacienteExistenteException();  // Si ya existe un paciente con el mismo correo
         }
 
         return pacienteRepository.save(new Paciente(nombre, apellido, mail, password));
@@ -41,13 +44,21 @@ public class PacienteServiceImpl implements PacienteService {
         
     @Override
     public Paciente modifyPaciente(Long id, String nombre, String apellido, String mail, String password) throws PacienteInexistenteException {
-        // mail = mail.toLowerCase();
-        // Optional<Paciente> paciente = pacienteRepository.findByMail(mail);
-        
-        // if (!paciente.isEmpty())
-        //     return pacienteRepository.save(new Paciente(id, nombre, apellido, mail, password));
-        // throw new PacienteInexistenteException();
-        return null;
+        Optional<Paciente> pacienteOriginal = pacienteRepository.findById(id);
+
+        if (pacienteOriginal.isEmpty()) {
+            throw new PacienteInexistenteException();
+        }
+
+        Paciente paciente = pacienteOriginal.get();
+
+        // actualiza campos no nulos
+        if (nombre != null) paciente.setNombre(nombre);
+        if (apellido != null) paciente.setApellido(apellido);
+        if (mail != null) paciente.setMail(mail.toLowerCase());
+        if (password != null) paciente.setPassword(password);
+
+        return pacienteRepository.save(paciente);
     }
 
     @Override

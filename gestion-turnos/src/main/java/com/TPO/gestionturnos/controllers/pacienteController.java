@@ -60,13 +60,23 @@ public class pacienteController {
         return ResponseEntity.noContent().build();
     }
 
+
+
+
     @Operation(summary = "Crear un paciente", description = "Crea un nuevo paciente en el sistema con nombre, apellido, mail y contraseña. Si el mail ya existe, lanza una excepción.")
     @PostMapping
     public ResponseEntity<Object> createPaciente(@RequestBody NuevoPacienteRequest pacienteRequest)
             throws PacienteExistenteException {
+        System.out.println("Mail recibido: " + pacienteRequest.getMail());  // Verifica el valor recibido
+        System.out.println("Nombre recibido: " + pacienteRequest.getNombre());  // Verifica el valor recibido
+        System.out.println("Apellido recibido: " + pacienteRequest.getApellido());  // Verifica el valor recibido
+        System.out.println("Password recibido: " + pacienteRequest.getPassword());  // Verifica el valor recibido
         Paciente result = pacienteService.createPaciente(pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         return ResponseEntity.created(URI.create("/paciente/" + result.getId())).body(result);
     }
+
+
+    
 
     @Operation(summary = "Checkea que el email y contraseña matcheen", description = "Verifica si el mail y la contraseña proporcionados corresponden a un paciente registrado. Si son válidos, devuelve el ID del paciente.")
     @PostMapping("/login")
@@ -75,6 +85,9 @@ public class pacienteController {
         Long result = pacienteService.loginPaciente(pacienteRequest.getMail(), pacienteRequest.getPassword());
         return ResponseEntity.created(URI.create("/usuarios/login/" + result)).body(result);
     }
+
+
+
 
     // hacer que este metodo sea privado
     @Operation(summary = "Modificar un paciente", description = "Modifica los datos de un paciente ya registrado (nombre, apellido, mail y/o contraseña) según el ID proporcionado. Si no existe el paciente, lanza una excepción.")

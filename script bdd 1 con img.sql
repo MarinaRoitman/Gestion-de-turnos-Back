@@ -31,8 +31,7 @@ CREATE TABLE Paciente (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
-    mail TEXT
-,
+    mail TEXT,
     contrasena TEXT NOT NULL
 );
 
