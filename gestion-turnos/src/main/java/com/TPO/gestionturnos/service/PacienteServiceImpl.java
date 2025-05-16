@@ -28,9 +28,9 @@ public class PacienteServiceImpl implements PacienteService {
 
     @Override
     public Paciente createPaciente(String nombre, String apellido, String mail, String password) throws PacienteExistenteException {
-        if (mail == null || mail.trim().isEmpty()) {
-            throw new IllegalArgumentException("El correo electrónico no puede ser nulo o vacío");
-        }
+        // if (mail == null || mail.trim().isEmpty()) {
+        //     throw new IllegalArgumentException("El correo electrónico no puede ser nulo o vacío");
+        // }
         mail = mail.toLowerCase();
 
         Optional<Paciente> pacienteExistente = pacienteRepository.findByMail(mail);
