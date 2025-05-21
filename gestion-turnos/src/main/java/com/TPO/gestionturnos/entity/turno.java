@@ -6,6 +6,9 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "turno")
 public class Turno {
@@ -18,22 +21,26 @@ public class Turno {
     private LocalTime hora;
 
     @ManyToOne
-    @JoinColumn(name = "fk_paciente")
+    @JoinColumn(name = "fkPaciente")
+    @JsonBackReference
     private Paciente paciente;
 
     @ManyToOne
-    @JoinColumn(name = "fk_profesional")
+    @JoinColumn(name = "fkProfesional")
+    @JsonBackReference
     private Profesional profesional;
 
     @ManyToOne
-    @JoinColumn(name = "fk_estado")
+    @JoinColumn(name = "fkEstado")
     private Estado estado;
 
     @ManyToOne
-    @JoinColumn(name = "fk_afiliacion")
+    @JoinColumn(name = "fkAfiliacion")
+    @JsonBackReference
     private Afiliacion afiliacion;
 
     @OneToMany(mappedBy = "turno", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonManagedReference
     private List<Imagen> imagenes = new ArrayList<>();
 
     // Getters y setters

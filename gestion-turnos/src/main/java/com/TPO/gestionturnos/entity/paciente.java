@@ -3,6 +3,8 @@ package com.TPO.gestionturnos.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "paciente")
 public class Paciente {
@@ -24,9 +26,11 @@ public class Paciente {
     private String password;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Afiliacion> afiliaciones;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    @JsonManagedReference
     private List<Turno> turnos;
 
     // Constructor por defecto requerido por JPA

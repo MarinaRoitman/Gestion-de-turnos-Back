@@ -5,5 +5,5 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 
 @ResponseStatus(code = HttpStatus.BAD_REQUEST, reason = "No existe el paciente")
 public class PacienteInexistenteException extends Exception {
-
+    
 }

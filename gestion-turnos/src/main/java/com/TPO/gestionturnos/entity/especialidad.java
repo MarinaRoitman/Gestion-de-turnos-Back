@@ -13,7 +13,7 @@ public class Especialidad {
 
     private String nombre;
 
-    @OneToMany(mappedBy = "especialidad", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "especialidades")
     private List<Profesional> profesionales;
 
     // Getters y setters

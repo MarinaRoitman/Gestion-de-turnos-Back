@@ -3,8 +3,10 @@ package com.TPO.gestionturnos.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
-@Table(name = "obra_social")
+@Table(name = "obraSocial")
 public class ObraSocial {
 
     @Id
@@ -14,9 +16,11 @@ public class ObraSocial {
     private String nombre;
 
     @OneToMany(mappedBy = "obraSocial", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Afiliacion> afiliaciones;
 
     @OneToMany(mappedBy = "obraSocial", cascade = CascadeType.ALL)
+    @JsonManagedReference
     private List<Plan> planes;
 
     // Getters y setters

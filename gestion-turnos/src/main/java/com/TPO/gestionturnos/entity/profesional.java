@@ -3,6 +3,8 @@ package com.TPO.gestionturnos.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 @Entity
 @Table(name = "profesional")
 public class Profesional {
@@ -15,9 +17,13 @@ public class Profesional {
     private String apellido;
     private String matricula;
 
-    @ManyToOne
-    @JoinColumn(name = "fk_especialidad")
-    private Especialidad especialidad;
+    @ManyToMany
+    @JoinTable(
+    name = "Profesional_Especialidad",
+    joinColumns = @JoinColumn(name = "fkProfesional"),
+    inverseJoinColumns = @JoinColumn(name = "fkEspecialidad"))
+    @JsonIgnore
+    private List<Especialidad> especialidades;
 
     @OneToMany(mappedBy = "profesional", cascade = CascadeType.ALL)
     private List<Turno> turnos;
@@ -56,12 +62,12 @@ public class Profesional {
         this.matricula = matricula;
     }
 
-    public Especialidad getEspecialidad() {
-        return especialidad;
+    public List<Especialidad> getEspecialidad() {
+        return especialidades;
     }
 
-    public void setEspecialidad(Especialidad especialidad) {
-        this.especialidad = especialidad;
+    public void setEspecialidad(List<Especialidad> especialidades) {
+        this.especialidades = especialidades;
     }
 
     public List<Turno> getTurnos() {

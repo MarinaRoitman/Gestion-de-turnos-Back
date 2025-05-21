@@ -25,8 +25,8 @@ import com.TPO.gestionturnos.exceptions.PacienteLoginNoExitosoException;
 import com.TPO.gestionturnos.service.PacienteService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
-import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.web.bind.annotation.RequestBody;
+
 
 @RestController
 @RequestMapping("/pacientes")
@@ -63,26 +63,30 @@ public class pacienteController {
 
     @Operation(summary = "Crear un paciente", description = "Crea un nuevo paciente en el sistema con nombre, apellido, mail y contraseña. Si el mail ya existe, lanza una excepción.")
     @PostMapping
-    public ResponseEntity<Object> createPaciente(@RequestBody NuevoPacienteRequest pacienteRequest) throws PacienteExistenteException {
+    public ResponseEntity<Object> createPaciente(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del nuevo paciente a crear")
+    @RequestBody NuevoPacienteRequest pacienteRequest)
+    throws PacienteExistenteException {
         Paciente result = pacienteService.createPaciente(pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         return ResponseEntity.created(URI.create("/paciente/" + result.getId())).body(result);
     }
 
     @Operation(summary = "Checkea que el email y contraseña matcheen", description = "Verifica si el mail y la contraseña proporcionados corresponden a un paciente registrado. Si son válidos, devuelve el ID del paciente.")
     @PostMapping("/login")
-    public ResponseEntity<Object> loginPaciente(@RequestBody LoginPacienteRequest pacienteRequest)
-            throws PacienteLoginNoExitosoException {
+    public ResponseEntity<Object> loginPaciente(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Mail y password del paciente iniciando sesion")
+    @RequestBody LoginPacienteRequest pacienteRequest)
+        throws PacienteLoginNoExitosoException {
         Long result = pacienteService.loginPaciente(pacienteRequest.getMail(), pacienteRequest.getPassword());
         return ResponseEntity.created(URI.create("/usuarios/login/" + result)).body(result);
     }
-
-
-
-
+    
     // hacer que este metodo sea privado
     @Operation(summary = "Modificar un paciente", description = "Modifica los datos de un paciente ya registrado (nombre, apellido, mail y/o contraseña) según el ID proporcionado. Si no existe el paciente, lanza una excepción.")
     @PutMapping("/{pacienteId}")
-    public ResponseEntity<Object> modifyPaciente(@RequestBody ModificarPacienteRequest pacienteRequest) throws PacienteInexistenteException{
+    public ResponseEntity<Object> modifyPaciente(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Mail y password del paciente iniciando sesion")
+    @RequestBody ModificarPacienteRequest pacienteRequest) throws PacienteInexistenteException{
         Paciente result = pacienteService.modifyPaciente(pacienteRequest.getId(), pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
     }
@@ -90,14 +94,15 @@ public class pacienteController {
     @Operation(summary = "Recuperar contraseña de un paciente", description = "Recibe el mail del usuario y lanza  una exceción si el mail no está registrado.")
     @PutMapping("recupero/{pacienteMail}")
     public ResponseEntity<Object> recoverPassword(@RequestBody ModificarPasswordRequest passwordRequest) throws PacienteInexistenteException{
-        // hacer funcion
+        // hacer funcion despues :)
         Paciente result = pacienteService.recoverPassword(passwordRequest.getMail());
         return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
     }
     
     @Operation(summary = "Eliminar un paciente", description = "Elimina un paciente según el ID proporcionado. Si no existe el paciente, lanza una excepción.")
     @DeleteMapping("/{pacienteId}")
-    public void deletePaciente(@RequestBody EliminarPacienteRequest pacienteRequest) throws PacienteInexistenteException{
-        // hacer funcion
+    public ResponseEntity<Void> deletePaciente(@RequestBody EliminarPacienteRequest pacienteRequest) throws PacienteInexistenteException{
+        pacienteService.deletePaciente(pacienteRequest.getId());
+        return ResponseEntity.noContent().build();
     }
 }

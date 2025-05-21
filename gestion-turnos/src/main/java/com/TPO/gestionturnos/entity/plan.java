@@ -3,6 +3,8 @@ package com.TPO.gestionturnos.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "plan")
 public class Plan {
@@ -14,7 +16,8 @@ public class Plan {
     private String nombre;
 
     @ManyToOne
-    @JoinColumn(name = "fk_obra_social")
+    @JoinColumn(name = "fkObraSocial")
+    @JsonBackReference
     private ObraSocial obraSocial;
 
 

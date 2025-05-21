@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "notificacion")
 public class Notificacion {
@@ -17,10 +19,12 @@ public class Notificacion {
 
     @ManyToOne
     @JoinColumn(name = "fkTurno", nullable = false)
+    @JsonBackReference
     private Turno turno;
 
     @ManyToOne
     @JoinColumn(name = "fkPaciente", nullable = false)
+    @JsonBackReference
     private Paciente paciente;
 
     @Column(nullable = false)

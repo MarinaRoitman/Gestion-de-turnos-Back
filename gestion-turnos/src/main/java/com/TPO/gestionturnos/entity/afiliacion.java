@@ -3,6 +3,9 @@ package com.TPO.gestionturnos.entity;
 import jakarta.persistence.*;
 import java.time.LocalDate;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "afiliacion")
 public class Afiliacion {
@@ -16,11 +19,13 @@ public class Afiliacion {
     private LocalDate fechaFin;
 
     @ManyToOne
-    @JoinColumn(name = "fk_paciente")
+    @JoinColumn(name = "fkPaciente")
+    @JsonBackReference
     private Paciente paciente;
 
     @ManyToOne
-    @JoinColumn(name = "fk_obra_social")
+    @JoinColumn(name = "fkObraSocial")
+    @JsonBackReference
     private ObraSocial obraSocial;
 
     // Getters y setters

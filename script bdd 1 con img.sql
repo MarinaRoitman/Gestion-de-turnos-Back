@@ -85,8 +85,8 @@ CREATE TABLE Afiliacion (
     fkPaciente BIGINT NOT NULL,
     fechaAlta DATE NOT NULL,
     fechaFin DATE,
-    FOREIGN KEY (fkObraSocial) REFERENCES ObraSocial(id),
-    FOREIGN KEY (fkPaciente) REFERENCES Paciente(id)
+    FOREIGN KEY (fkObraSocial) REFERENCES ObraSocial(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (fkPaciente) REFERENCES Paciente(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
 -- Tabla Notificacion

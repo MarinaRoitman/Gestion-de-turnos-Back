@@ -1,5 +1,7 @@
 package com.TPO.gestionturnos.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class Imagen {
 
     @ManyToOne
     @JoinColumn(name = "fkTurno", nullable = false)
+    @JsonBackReference
     private Turno turno;
 
     @Column(columnDefinition = "TEXT")
