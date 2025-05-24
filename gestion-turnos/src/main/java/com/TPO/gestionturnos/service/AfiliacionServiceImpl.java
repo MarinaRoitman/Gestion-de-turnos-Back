@@ -10,13 +10,11 @@ import org.springframework.stereotype.Service;
 import com.TPO.gestionturnos.entity.Afiliacion;
 import com.TPO.gestionturnos.entity.ObraSocial;
 import com.TPO.gestionturnos.entity.Paciente;
-import com.TPO.gestionturnos.entity.Plan;
 import com.TPO.gestionturnos.exceptions.AfiliacionIncompatibleException;
 import com.TPO.gestionturnos.exceptions.AfiliacionInexistenteException;
 import com.TPO.gestionturnos.exceptions.AfiliacionNoCreadaException;
 import com.TPO.gestionturnos.exceptions.ObraSocialInexistenteException;
 import com.TPO.gestionturnos.exceptions.PacienteInexistenteException;
-import com.TPO.gestionturnos.exceptions.PlanInexistenteException;
 import com.TPO.gestionturnos.repository.AfiliacionesRepository;
 
 @Service

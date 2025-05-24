@@ -38,7 +38,7 @@ CREATE TABLE Paciente (
 -- Tabla Estado
 CREATE TABLE Estado (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    etiqueta ENUM('Cancelado', 'Cumplido', 'Reservado', 'Disponible') NOT NULL
+    nombre ENUM('Cancelado', 'Cumplido', 'Reservado', 'Disponible') NOT NULL
 );
 
 -- Tabla Turno
@@ -103,7 +103,7 @@ CREATE TABLE Notificacion (
 );
 
 -- Inserción de datos
-INSERT INTO Estado (etiqueta) VALUES ('Cancelado'), ('Cumplido'), ('Reservado'), ('Disponible');
+INSERT INTO Estado (nombre) VALUES ('Cancelado'), ('Cumplido'), ('Reservado'), ('Disponible');
 
 INSERT INTO Especialidad (nombre) VALUES ('Cardiología'), ('Pediatría'), ('Dermatología');
 
