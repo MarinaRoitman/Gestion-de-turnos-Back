@@ -12,6 +12,5 @@ public class ModificarAfiliacionRequest {
     private String nroAfiliado;
     private LocalDate fechaAlta;
     private LocalDate fechaFin;
-    private Paciente paciente;
-    private ObraSocial obraSocial;
+    private Long idObraSocial;
 }

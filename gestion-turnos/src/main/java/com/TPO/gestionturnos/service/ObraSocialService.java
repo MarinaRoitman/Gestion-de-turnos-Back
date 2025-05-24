@@ -12,7 +12,7 @@ public interface ObraSocialService {
 
     public List<ObraSocial> getObrasSociales();
 
-    public Optional <ObraSocial> getObraSocialById(Long id) throws ObraSocialInexistenteException;
+    public Optional<ObraSocial> getObraSocialById(Long id) throws ObraSocialInexistenteException;
 
     public Optional<ObraSocial> getObraSocialByNombre(String obraSocialNombre) throws ObraSocialInexistenteException;
 

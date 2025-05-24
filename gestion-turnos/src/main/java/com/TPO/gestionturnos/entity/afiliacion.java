@@ -28,7 +28,19 @@ public class Afiliacion {
     @JsonBackReference
     private ObraSocial obraSocial;
 
+    public Afiliacion(){
+        
+    }
     // Getters y setters
+
+    public Afiliacion(String nroAfiliado, LocalDate fechaAlta, LocalDate fechaFin, Paciente paciente,
+            ObraSocial obraSocial) {
+        this.nroAfiliado = nroAfiliado;
+        this.fechaAlta = fechaAlta;
+        this.fechaFin = fechaFin;
+        this.paciente = paciente;
+        this.obraSocial = obraSocial;
+    }
 
     public Long getId() {
         return id;
