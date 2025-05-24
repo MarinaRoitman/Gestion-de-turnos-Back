@@ -23,8 +23,15 @@ public class ObraSocial {
     @JsonManagedReference
     private List<Plan> planes;
 
-    // Getters y setters
+    public ObraSocial(){
+        
+    }
 
+    // Getters y setters
+    public ObraSocial(String nombre){
+        this.nombre = nombre;
+    }
+    
     public Long getId() {
         return id;
     }

@@ -14,7 +14,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.TPO.gestionturnos.entity.Profesional;
 import com.TPO.gestionturnos.entity.DTOs.EliminarProfesionalRequest;
-import com.TPO.gestionturnos.entity.DTOs.ModificarCrearProfesionalRequest;
+import com.TPO.gestionturnos.entity.DTOs.ModificarProfesionalRequest;
+import com.TPO.gestionturnos.entity.DTOs.CrearProfesionalRequest;
 import com.TPO.gestionturnos.exceptions.EspecialidadInexistenteException;
 import com.TPO.gestionturnos.exceptions.ProfesionalExistenteException;
 import com.TPO.gestionturnos.exceptions.ProfesionalInexistenteException;
@@ -79,7 +80,7 @@ public class profesionalController {
 
     @Operation(summary = "Crear un profesional", description = "Crea un nuevo profesional en el sistema con nombre, apellido, mail y nroMatricula. Si el mail o nroMatricula ya existe, lanza una excepción.")
     @PostMapping
-    public ResponseEntity<Object> createProfesional(@RequestBody ModificarCrearProfesionalRequest profesionalRequest) throws ProfesionalExistenteException {
+    public ResponseEntity<Object> createProfesional(@RequestBody CrearProfesionalRequest profesionalRequest) throws ProfesionalExistenteException {
         // Paciente result = pacienteService.createPaciente(pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         // return ResponseEntity.created(URI.create("/paciente/" + result.getId())).body(result);
         return null;
@@ -88,7 +89,7 @@ public class profesionalController {
     // hacer que este metodo sea privado
     @Operation(summary = "Modificar un profesional", description = "Modifica los datos de un profesional ya registrado (nombre, apellido, mail y/o matricula) según el ID proporcionado. Si no existe el profesional, lanza una excepción.")
     @PutMapping("/{profesionalId}")
-    public ResponseEntity<Object> modifyProfesional(@RequestBody ModificarCrearProfesionalRequest profesionalRequest) throws ProfesionalInexistenteException{
+    public ResponseEntity<Object> modifyProfesional(@RequestBody ModificarProfesionalRequest profesionalRequest) throws ProfesionalInexistenteException{
         // Paciente result = pacienteService.modifyPaciente(pacienteRequest.getId(), pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         // return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
         return null;

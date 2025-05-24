@@ -4,7 +4,7 @@ import com.TPO.gestionturnos.entity.ObraSocial;
 import lombok.Data;
 
 @Data
-public class ModificarCrearPlanRequest {
+public class CrearPlanRequest {
     private String nombre;
-    private ObraSocial obraSocial;
+    private Long idObraSocial;
 }

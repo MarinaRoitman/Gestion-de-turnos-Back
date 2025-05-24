@@ -12,7 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.TPO.gestionturnos.entity.Especialidad;
 import com.TPO.gestionturnos.entity.DTOs.EliminarEspecialidadRequest;
-import com.TPO.gestionturnos.entity.DTOs.ModificarCrearEspecialidadRequest;
+import com.TPO.gestionturnos.entity.DTOs.ModificarEspecialidadRequest;
+import com.TPO.gestionturnos.entity.DTOs.CrearEspecialidadRequest;
 import com.TPO.gestionturnos.exceptions.EspecialidadExistenteException;
 import com.TPO.gestionturnos.exceptions.EspecialidadInexistenteException;
 
@@ -44,7 +45,7 @@ public class especialidadController {
 
     @Operation(summary = "Crear una especialidad", description = "Crea una nueva especialidad en el sistema con el nombre. Si la especialidad ya existe, lanza una excepción.")
     @PostMapping
-    public ResponseEntity<Object> createEspecialidad(@RequestBody ModificarCrearEspecialidadRequest especialidadRequest) throws EspecialidadExistenteException {
+    public ResponseEntity<Object> createEspecialidad(@RequestBody CrearEspecialidadRequest especialidadRequest) throws EspecialidadExistenteException {
         // Paciente result = pacienteService.createPaciente(pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         // return ResponseEntity.created(URI.create("/paciente/" + result.getId())).body(result);
         return null;
@@ -53,7 +54,7 @@ public class especialidadController {
     // hacer que este metodo sea privado, hacer void?
     @Operation(summary = "Modificar una especialidad", description = "Modifica el nombre de una especialidad según el ID proporcionado. Si no existe la especialidad, lanza una excepción.")
     @PutMapping("/{especialidadId}")
-    public ResponseEntity<Object> modifyEspecialidad(@RequestBody ModificarCrearEspecialidadRequest especialidadRequest) throws EspecialidadInexistenteException{
+    public ResponseEntity<Object> modifyEspecialidad(@RequestBody ModificarEspecialidadRequest especialidadRequest) throws EspecialidadInexistenteException{
         // Paciente result = pacienteService.modifyPaciente(pacienteRequest.getId(), pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         // return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
         return null;

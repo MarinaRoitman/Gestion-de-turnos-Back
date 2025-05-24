@@ -7,7 +7,7 @@ import com.TPO.gestionturnos.entity.Paciente;
 import lombok.Data;
 
 @Data
-public class ModificarCrearAfiliacionRequest {
+public class CrearAfiliacionRequest {
     private String nroAfiliado;
     private LocalDate fechaAlta;
     private LocalDate fechaFin;

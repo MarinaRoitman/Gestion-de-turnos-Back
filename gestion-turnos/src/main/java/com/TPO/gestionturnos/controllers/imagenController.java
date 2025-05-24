@@ -2,7 +2,8 @@ package com.TPO.gestionturnos.controllers;
 
 import com.TPO.gestionturnos.entity.Imagen;
 import com.TPO.gestionturnos.entity.DTOs.EliminarImagenRequest;
-import com.TPO.gestionturnos.entity.DTOs.ModificarCrearImagenRequest;
+import com.TPO.gestionturnos.entity.DTOs.ModificarImagenRequest;
+import com.TPO.gestionturnos.entity.DTOs.CrearImagenRequest;
 import com.TPO.gestionturnos.exceptions.ImagenInexistenteException;
 import com.TPO.gestionturnos.exceptions.TurnoInexistenteException;
 
@@ -45,7 +46,7 @@ public class imagenController {
 
     @Operation(summary = "Crear imagen", description = "Crea una nueva imagen.")
     @PostMapping
-    public ResponseEntity<Object> createImagen(@RequestBody ModificarCrearImagenRequest imagenRequest) {
+    public ResponseEntity<Object> createImagen(@RequestBody CrearImagenRequest imagenRequest) {
         // Imagen created = imagenService.create(imagen);
         // return ResponseEntity.created(URI.create("/imagen/" + created.getId())).body(created);
         return null;
@@ -61,7 +62,7 @@ public class imagenController {
 
     @Operation(summary = "Modificar imagen", description = "Modifica una imagen existente.")
     @PutMapping("/{id}")
-    public ResponseEntity<Object> updateImagen(@RequestBody ModificarCrearImagenRequest imagenRequest) throws ImagenInexistenteException {
+    public ResponseEntity<Object> updateImagen(@RequestBody ModificarImagenRequest imagenRequest) throws ImagenInexistenteException {
         // Imagen updated = imagenService.update(id, imagen);
         // return ResponseEntity.ok(updated);
         return null;

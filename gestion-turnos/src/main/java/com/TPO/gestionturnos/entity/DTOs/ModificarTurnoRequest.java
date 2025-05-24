@@ -12,7 +12,8 @@ import com.TPO.gestionturnos.entity.Profesional;
 import lombok.Data;
 
 @Data
-public class ModificarCrearTurnoRequest {
+public class ModificarTurnoRequest {
+    private Long id;
     private LocalDate fecha;
     private LocalTime hora;
     private Paciente paciente;

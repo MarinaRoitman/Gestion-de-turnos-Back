@@ -4,8 +4,7 @@ import com.TPO.gestionturnos.entity.Turno;
 import lombok.Data;
 
 @Data
-public class ModificarCrearImagenRequest {
-    private Long id;
+public class CrearImagenRequest {
     private Turno turno;
     private String titulo;
     private byte[] imagen;

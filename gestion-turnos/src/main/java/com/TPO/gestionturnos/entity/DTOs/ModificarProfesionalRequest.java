@@ -7,7 +7,8 @@ import com.TPO.gestionturnos.entity.Turno;
 import lombok.Data;
 
 @Data
-public class ModificarCrearProfesionalRequest {
+public class ModificarProfesionalRequest {
+    private Long id;
     private String nombre;
     private String apellido;
     private String mail;

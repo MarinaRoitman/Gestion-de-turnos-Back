@@ -20,8 +20,14 @@ public class Plan {
     @JsonBackReference
     private ObraSocial obraSocial;
 
+    public Plan(){
 
+    }
     // Getters y setters
+
+    public Plan(String nombre2, Long idObraSocial) {
+        //TODO Auto-generated constructor stub
+    }
 
     public Long getId() {
         return id;

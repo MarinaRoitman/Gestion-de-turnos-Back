@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.TPO.gestionturnos.entity.Turno;
-import com.TPO.gestionturnos.entity.DTOs.EliminarTurnodRequest;
-import com.TPO.gestionturnos.entity.DTOs.ModificarCrearTurnoRequest;
+import com.TPO.gestionturnos.entity.DTOs.EliminarTurnosRequest;
+import com.TPO.gestionturnos.entity.DTOs.ModificarTurnoRequest;
+import com.TPO.gestionturnos.entity.DTOs.CrearTurnoRequest;
 import com.TPO.gestionturnos.exceptions.TurnoInexistenteException;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -95,7 +96,7 @@ public class turnoController {
 
     @Operation(summary = "Crear un turno", description = "Crea un turno.")
     @PostMapping
-    public ResponseEntity<Object> createTurno(@RequestBody ModificarCrearTurnoRequest turnoRequest) {// deberia tirar error si ya existe? a lo mejor el medico puede atender doble?
+    public ResponseEntity<Object> createTurno(@RequestBody CrearTurnoRequest turnoRequest) {// deberia tirar error si ya existe? a lo mejor el medico puede atender doble?
         // Paciente result = pacienteService.createPaciente(pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         // return ResponseEntity.created(URI.create("/paciente/" + result.getId())).body(result);
         return null;
@@ -104,7 +105,7 @@ public class turnoController {
     // hacer que este metodo sea privado, hacer void?
     @Operation(summary = "Modificar un turno", description = "Modifica un turno según el ID proporcionado. Si no existe el turno, lanza una excepción.")
     @PutMapping("/{turnoId}")
-    public ResponseEntity<Object> modifyTurno(@RequestBody ModificarCrearTurnoRequest turnoRequest) throws TurnoInexistenteException{
+    public ResponseEntity<Object> modifyTurno(@RequestBody ModificarTurnoRequest turnoRequest) throws TurnoInexistenteException{
         // Paciente result = pacienteService.modifyPaciente(pacienteRequest.getId(), pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         // return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
         return null;
@@ -112,7 +113,7 @@ public class turnoController {
 
     @Operation(summary = "Eliminar un turno", description = "Elimina un turno según el ID proporcionado. Si no existe el turno, lanza una excepción.")
     @DeleteMapping("/{turnoId}")
-    public void deleteTurno(@RequestBody EliminarTurnodRequest turnoRequest) throws TurnoInexistenteException{
+    public void deleteTurno(@RequestBody EliminarTurnosRequest turnoRequest) throws TurnoInexistenteException{
         // hacer funcion
     }
 }

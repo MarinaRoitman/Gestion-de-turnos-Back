@@ -13,7 +13,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.TPO.gestionturnos.entity.Afiliacion;
 import com.TPO.gestionturnos.entity.DTOs.EliminarAfiliacionRequest;
-import com.TPO.gestionturnos.entity.DTOs.ModificarCrearAfiliacionRequest;
+import com.TPO.gestionturnos.entity.DTOs.ModificarAfiliacionRequest;
+import com.TPO.gestionturnos.entity.DTOs.CrearAfiliacionRequest;
 import com.TPO.gestionturnos.exceptions.AfiliacionIncompatibleException;
 import com.TPO.gestionturnos.exceptions.AfiliacionInexistenteException;
 import com.TPO.gestionturnos.exceptions.ObraSocialInexistenteException;
@@ -71,7 +72,7 @@ public class afiliacionController {
 
     @Operation(summary = "Crear una afiliacion", description = "Crea una nueva afiliacion en el sistema con el nroAfiliado, fkObraSocial, fkPaciente, fechaAlta, fechaFin. Si la afiliacion ya existe, lanza una excepción.")
     @PostMapping
-    public ResponseEntity<Object> createAfiliacion(@RequestBody ModificarCrearAfiliacionRequest afiliacionRequest) throws AfiliacionIncompatibleException {
+    public ResponseEntity<Object> createAfiliacion(@RequestBody CrearAfiliacionRequest afiliacionRequest) throws AfiliacionIncompatibleException {
         // Paciente result = pacienteService.createPaciente(pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         // return ResponseEntity.created(URI.create("/paciente/" + result.getId())).body(result);
         return null;
@@ -80,7 +81,7 @@ public class afiliacionController {
     // hacer que este metodo sea privado, hacer void?
     @Operation(summary = "Modificar una afiliacion", description = "Modifica la afiliacion según el ID proporcionado. Si no existe la afiliacion, lanza una excepción.")
     @PutMapping("/{afiliacionId}")
-    public ResponseEntity<Object> modifyAfiliacion(@RequestBody ModificarCrearAfiliacionRequest afiliacionRequest) throws AfiliacionInexistenteException{
+    public ResponseEntity<Object> modifyAfiliacion(@RequestBody ModificarAfiliacionRequest afiliacionRequest) throws AfiliacionInexistenteException{
         // Paciente result = pacienteService.modifyPaciente(pacienteRequest.getId(), pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
         // return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
         return null;

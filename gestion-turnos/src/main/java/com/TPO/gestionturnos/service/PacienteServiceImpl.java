@@ -24,7 +24,6 @@ public class PacienteServiceImpl implements PacienteService {
     public List<Paciente> getPacientes() {
         return pacienteRepository.findAll();
     }
-    
 
     @Override
     public Paciente createPaciente(String nombre, String apellido, String mail, String password) throws PacienteExistenteException {
