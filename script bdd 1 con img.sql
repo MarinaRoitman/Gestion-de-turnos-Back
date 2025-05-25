@@ -14,7 +14,7 @@ CREATE TABLE Profesional (
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
     mail TEXT NOT NULL,
-    nroMatricula TEXT NOT NULL
+    matricula TEXT NOT NULL
 );
 
 -- Tabla intermedia Profesional_Especialidad
@@ -107,7 +107,7 @@ INSERT INTO Estado (nombre) VALUES ('Cancelado'), ('Cumplido'), ('Reservado'), (
 
 INSERT INTO Especialidad (nombre) VALUES ('Cardiología'), ('Pediatría'), ('Dermatología');
 
-INSERT INTO Profesional (nombre, apellido, mail, nroMatricula) VALUES
+INSERT INTO Profesional (nombre, apellido, mail, matricula) VALUES
 ('Joaco', 'Jawer', 'jjawer@gmail.com', 'MAT123'),
 ('Maru', 'Roitman', 'mroitman@gmail.com', 'MAT456'),
 ('Caro', 'Guevara', 'cguevara@gmail.com', 'MAT789');
@@ -139,3 +139,12 @@ INSERT INTO Turno (fkPaciente, fkProfesional, fkEstado, fecha, hora, notas) VALU
 (1, 1, 3, '2025-04-10', '09:00:00', 'Consulta general'),
 (2, 2, 2, '2025-03-25', '11:30:00', 'Control mensual'),
 (3, 3, 1, '2025-04-02', '15:00:00', 'Cancelado por el paciente');
+
+-- Inserciones de notificaciones
+INSERT INTO Notificacion (texto, fkTurno, fkPaciente, fechaEnvio, horaEnvio, visible) VALUES
+('Recordatorio: Tiene un turno reservado para el 10/04/2025 a las 09:00.', 1, 1, '2025-04-09', '10:00:00', true),
+('Turno cumplido el 25/03/2025 a las 11:30. Gracias por asistir.', 2, 2, '2025-03-25', '13:00:00', false),
+('Su turno del 02/04/2025 fue cancelado.', 3, 3, '2025-04-01', '17:00:00', true),
+('Nuevo turno disponible con Dr. Joaco el 15/04/2025.', 1, 1, '2025-04-05', '08:30:00', true),
+('Se ha modificado el estado de su turno. Ahora está marcado como cumplido.', 2, 2, '2025-03-26', '09:15:00', false),
+('Recordatorio: No olvide traer estudios previos a la consulta.', 1, 1, '2025-04-09', '18:45:00', true);

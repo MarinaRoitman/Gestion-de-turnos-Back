@@ -34,11 +34,6 @@ public class Turno {
     @JoinColumn(name = "fkEstado")
     private Estado estado;
 
-    @ManyToOne
-    @JoinColumn(name = "fkAfiliacion")
-    @JsonBackReference
-    private Afiliacion afiliacion;
-
     @OneToMany(mappedBy = "turno", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonManagedReference
     private List<Imagen> imagenes = new ArrayList<>();
@@ -91,14 +86,6 @@ public class Turno {
 
     public void setEstado(Estado estado) {
         this.estado = estado;
-    }
-
-    public Afiliacion getAfiliacion() {
-        return afiliacion;
-    }
-
-    public void setAfiliacion(Afiliacion afiliacion) {
-        this.afiliacion = afiliacion;
     }
 
     public List<Imagen> getImagenes() {
