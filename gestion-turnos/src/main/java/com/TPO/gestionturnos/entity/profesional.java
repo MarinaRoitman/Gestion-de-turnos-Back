@@ -3,7 +3,7 @@ package com.TPO.gestionturnos.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
 @Table(name = "profesional")
@@ -15,6 +15,7 @@ public class Profesional {
 
     private String nombre;
     private String apellido;
+    private String mail;
     private String matricula;
 
     @ManyToMany
@@ -22,11 +23,22 @@ public class Profesional {
     name = "Profesional_Especialidad",
     joinColumns = @JoinColumn(name = "fkProfesional"),
     inverseJoinColumns = @JoinColumn(name = "fkEspecialidad"))
-    @JsonIgnore
+    
+    @JsonManagedReference
     private List<Especialidad> especialidades;
 
     @OneToMany(mappedBy = "profesional", cascade = CascadeType.ALL)
     private List<Turno> turnos;
+
+    public Profesional() {
+    }
+
+    public Profesional(String nombre, String apellido, String matricula, String mail) {
+        this.nombre = nombre;
+        this.apellido = apellido;
+        this.matricula = matricula;
+        this.mail = mail;
+    }
 
     // Getters y setters
 
@@ -54,6 +66,14 @@ public class Profesional {
         this.apellido = apellido;
     }
 
+    public String getMail() {
+        return this.mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
     public String getMatricula() {
         return matricula;
     }
@@ -62,11 +82,11 @@ public class Profesional {
         this.matricula = matricula;
     }
 
-    public List<Especialidad> getEspecialidad() {
+    public List<Especialidad> getEspecialidades() {
         return especialidades;
     }
 
-    public void setEspecialidad(List<Especialidad> especialidades) {
+    public void setEspecialidades(List<Especialidad> especialidades) {
         this.especialidades = especialidades;
     }
 

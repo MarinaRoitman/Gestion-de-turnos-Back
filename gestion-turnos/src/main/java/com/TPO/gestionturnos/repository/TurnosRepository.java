@@ -4,7 +4,6 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.TPO.gestionturnos.entity.Paciente;
 import com.TPO.gestionturnos.entity.Turno;
 
 

@@ -11,6 +11,7 @@ import com.TPO.gestionturnos.entity.Paciente;
 import com.TPO.gestionturnos.entity.Turno;
 import com.TPO.gestionturnos.exceptions.NotificacionInexistenteException;
 import com.TPO.gestionturnos.exceptions.PacienteInexistenteException;
+import com.TPO.gestionturnos.exceptions.TurnoInexistenteException;
 import com.TPO.gestionturnos.repository.NotificacionesRepository;
 import com.TPO.gestionturnos.repository.PacientesRepository;
 import com.TPO.gestionturnos.repository.TurnosRepository;
@@ -49,9 +50,16 @@ public class NotificacionServiceImpl implements NotificacionService {
 
     @Override
     public Notificacion createNotificacion(String texto, Long idTurno, Long idPaciente)
-            throws PacienteInexistenteException {
+            throws PacienteInexistenteException, TurnoInexistenteException {
         Optional<Paciente> paciente = pacientesRepository.findById(idPaciente);
+        if (!paciente.isPresent()) {
+            throw new PacienteInexistenteException();
+        }
+
         Optional<Turno> turno = turnosRepository.findById(idTurno);
+        if (!turno.isPresent()) {
+            throw new TurnoInexistenteException();
+        }
         return notificacionesRepository.save(new Notificacion(texto, turno.get(), paciente.get()));
     }
 

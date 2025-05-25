@@ -3,6 +3,8 @@ package com.TPO.gestionturnos.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+
 @Entity
 @Table(name = "especialidad")
 public class Especialidad {
@@ -14,9 +16,16 @@ public class Especialidad {
     private String nombre;
 
     @ManyToMany(mappedBy = "especialidades")
+    @JsonBackReference
     private List<Profesional> profesionales;
 
     // Getters y setters
+    public Especialidad() {
+    }
+
+    public Especialidad(String nombre) {
+        this.nombre = nombre;
+    }
 
     public Long getId() {
         return id;
