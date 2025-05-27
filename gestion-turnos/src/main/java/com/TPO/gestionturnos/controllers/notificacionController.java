@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.TPO.gestionturnos.entity.Notificacion;
-import com.TPO.gestionturnos.entity.ObraSocial;
 import com.TPO.gestionturnos.entity.DTOs.EliminarNotificacionRequest;
 import com.TPO.gestionturnos.entity.DTOs.NuevaNotificacionRequest;
 import com.TPO.gestionturnos.exceptions.NotificacionInexistenteException;

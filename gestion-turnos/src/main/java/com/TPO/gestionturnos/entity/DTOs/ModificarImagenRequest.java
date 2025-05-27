@@ -6,7 +6,6 @@ import lombok.Data;
 @Data
 public class ModificarImagenRequest {
     private Long id;
-    private Turno turno;
     private String titulo;
     private byte[] imagen;
 }

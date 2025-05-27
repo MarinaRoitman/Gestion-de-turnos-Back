@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class CrearImagenRequest {
-    private Turno turno;
+    private Long idTurno;
     private String titulo;
     private byte[] imagen;
 }
