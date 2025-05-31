@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -22,12 +23,12 @@ public class Turno {
 
     @ManyToOne
     @JoinColumn(name = "fkPaciente")
-    @JsonBackReference
+    @JsonIgnoreProperties({"turnos", "afiliaciones", "password"})
     private Paciente paciente;
 
     @ManyToOne
     @JoinColumn(name = "fkProfesional")
-    @JsonBackReference
+    @JsonIgnoreProperties({"turnos", "especialidades"})
     private Profesional profesional;
 
     @ManyToOne

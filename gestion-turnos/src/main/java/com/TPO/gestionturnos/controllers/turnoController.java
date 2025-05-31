@@ -1,7 +1,10 @@
 package com.TPO.gestionturnos.controllers;
+import java.net.URI;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,7 +18,12 @@ import com.TPO.gestionturnos.entity.Turno;
 import com.TPO.gestionturnos.entity.DTOs.EliminarTurnosRequest;
 import com.TPO.gestionturnos.entity.DTOs.ModificarTurnoRequest;
 import com.TPO.gestionturnos.entity.DTOs.CrearTurnoRequest;
+import com.TPO.gestionturnos.exceptions.EstadoInexistenteException;
+import com.TPO.gestionturnos.exceptions.ImagenInexistenteException;
+import com.TPO.gestionturnos.exceptions.PacienteInexistenteException;
+import com.TPO.gestionturnos.exceptions.ProfesionalInexistenteException;
 import com.TPO.gestionturnos.exceptions.TurnoInexistenteException;
+import com.TPO.gestionturnos.service.TurnoService;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.parameters.RequestBody;
@@ -23,97 +31,97 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 @RestController
 @RequestMapping("/turno")
 public class turnoController {
+    @Autowired
+    private TurnoService turnoService;
+
     @Operation(summary = "Listar turnos", description = "Devuelve una lista con todos los turnos.")
     @GetMapping
     public ResponseEntity<List<Turno>> getTurnos() {
-        // return ResponseEntity.ok(pacienteService.getPacientes());
-        return null;
+        return ResponseEntity.ok(turnoService.getTurnos());
     }
 
     @Operation(summary = "Listar turnos por id", description = "Devuelve el turno cuyo id sea el ingresado. Si no existe, lanza una excepcion")
     @GetMapping("/{turnoId}")
-    public ResponseEntity<Turno> getTurnoById(@PathVariable Long turnoId) throws TurnoInexistenteException {
-        // Optional<Paciente> result = pacienteService.getPacienteById(especialidadId);
-        // if (result.isPresent())
-        //     return ResponseEntity.ok(result.get());
-        // return ResponseEntity.noContent().build();
-        return null;
+    public ResponseEntity<Optional<Turno>> getTurnoById(@PathVariable Long turnoId) throws TurnoInexistenteException {
+        return ResponseEntity.ok(turnoService.getTurnoById(turnoId));
     }
 
     @Operation(summary = "Listar turnos con fecha igual a la ingresada", description = "Devuelve turnos cuya fecha sea la ingresada")
     @GetMapping("fecha/{fecha}")
-    public ResponseEntity<List<Turno>> getTurnosPorFecha(@PathVariable LocalDate fecha) {
-        // Optional<Paciente> result = pacienteService.getPacienteById(especialidadId);
-        // if (result.isPresent())
-        //     return ResponseEntity.ok(result.get());
-        // return ResponseEntity.noContent().build();
-        return null;
+    public ResponseEntity<Optional<List<Turno>>> getTurnosPorFecha(@PathVariable LocalDate fecha){
+        return ResponseEntity.ok(turnoService.getTurnosPorFecha(fecha));
     }
 
     @Operation(summary = "Listar turnos con fecha mayor a la ingresada", description = "Devuelve turnos cuya fecha sea mayor a la ingresada")
     @GetMapping("desde/{fecha}")
-    public ResponseEntity<List<Turno>> getTurnosMayorFecha(@PathVariable LocalDate fecha) {
-        // Optional<Paciente> result = pacienteService.getPacienteById(especialidadId);
-        // if (result.isPresent())
-        //     return ResponseEntity.ok(result.get());
-        // return ResponseEntity.noContent().build();
-        return null;
+    public ResponseEntity<Optional<List<Turno>>> getTurnosMayorFecha(@PathVariable LocalDate fecha) {
+        return ResponseEntity.ok(turnoService.getTurnosMayorFecha(fecha));
     }
 
     // listar turnos por estado
     @Operation(summary = "Listar turnos por estado", description = "Devuelve turnos cuyo estado sea el ingresado")
     @GetMapping("estado/{estadoId}")
-    public ResponseEntity<List<Turno>> getTurnosByEstado(@PathVariable Long estadoId) {
-        // Optional<Paciente> result = pacienteService.getPacienteById(especialidadId);
-        // if (result.isPresent())
-        //     return ResponseEntity.ok(result.get());
-        // return ResponseEntity.noContent().build();
-        return null;
+    public ResponseEntity<Optional<List<Turno>>> getTurnosByEstado(@PathVariable Long estadoId) throws EstadoInexistenteException {
+        return ResponseEntity.ok(turnoService.getTurnosByEstado(estadoId));
     }
 
     // listar turnos por paciente
     @Operation(summary = "Listar turnos por paciente", description = "Devuelve los turnos de un paciente")
     @GetMapping("paciente/{pacienteId}")
-    public ResponseEntity<List<Turno>> getTurnosByPaciente(@PathVariable Long pacienteId) {
-        // Optional<Paciente> result = pacienteService.getPacienteById(especialidadId);
-        // if (result.isPresent())
-        //     return ResponseEntity.ok(result.get());
-        // return ResponseEntity.noContent().build();
-        return null;
+    public ResponseEntity<Optional<List<Turno>>> getTurnosByPaciente(@PathVariable Long pacienteId) throws PacienteInexistenteException {
+        return ResponseEntity.ok(turnoService.getTurnosByPaciente(pacienteId));
     }
 
     // listar turnos por profesional
-    @Operation(summary = "Listar turnos por estado", description = "Devuelve los turnos de un profesional")
+    @Operation(summary = "Listar turnos por profesional", description = "Devuelve los turnos de un profesional")
     @GetMapping("profesional/{profesionalId}")
-    public ResponseEntity<List<Turno>> getTurnosByProfesional(@PathVariable Long profesionalId) {
-        // Optional<Paciente> result = pacienteService.getPacienteById(especialidadId);
-        // if (result.isPresent())
-        //     return ResponseEntity.ok(result.get());
-        // return ResponseEntity.noContent().build();
-        return null;
+    public ResponseEntity<Optional<List<Turno>>> getTurnosByProfesional(@PathVariable Long profesionalId) throws ProfesionalInexistenteException{
+        return ResponseEntity.ok(turnoService.getTurnosByProfesional(profesionalId));
     }
 
+    @Operation(summary = "Listar turnos por paciente y estado", description = "Devuelve los turnos de un paciente con un estado determinado")
+    @GetMapping("paciente/{pacienteId}/estado/{estadoId}")
+    public ResponseEntity<Optional<List<Turno>>> getTurnosByPacienteYEstado(@PathVariable Long pacienteId, @PathVariable Long estadoId) throws PacienteInexistenteException, EstadoInexistenteException {
+        return ResponseEntity.ok(turnoService.getTurnosByPacienteYEstado(pacienteId, estadoId));
+    }
+
+    @Operation(summary = "Listar turnos por profesional y estado", description = "Devuelve los turnos de un profesional con un estado determinado")
+    @GetMapping("profesional/{profesionalId}/estado/{estadoId}")
+    public ResponseEntity<Optional<List<Turno>>> getTurnosByProfesionalYEstado(@PathVariable Long profesionalId, @PathVariable Long estadoId) throws ProfesionalInexistenteException, EstadoInexistenteException {
+        return ResponseEntity.ok(turnoService.getTurnosByProfesionalYEstado(profesionalId, estadoId));
+    }
 
     @Operation(summary = "Crear un turno", description = "Crea un turno.")
     @PostMapping
-    public ResponseEntity<Object> createTurno(@RequestBody CrearTurnoRequest turnoRequest) {// deberia tirar error si ya existe? a lo mejor el medico puede atender doble?
-        // Paciente result = pacienteService.createPaciente(pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
-        // return ResponseEntity.created(URI.create("/paciente/" + result.getId())).body(result);
-        return null;
+    public ResponseEntity<Object> createTurno(@RequestBody CrearTurnoRequest turnoRequest) throws PacienteInexistenteException, EstadoInexistenteException, ProfesionalInexistenteException, ImagenInexistenteException {// deberia tirar error si ya existe? a lo mejor el medico puede atender doble?
+        Turno result = turnoService.createTurno(
+                turnoRequest.getFecha(),
+                turnoRequest.getHora(),
+                turnoRequest.getIdPaciente(),
+                turnoRequest.getIdProfesional(),
+                turnoRequest.getIdEstado(),
+                turnoRequest.getIdImagenes());
+        return ResponseEntity.created(URI.create("/turno/" + result.getId())).body(result);
     }
 
-    // hacer que este metodo sea privado, hacer void?
     @Operation(summary = "Modificar un turno", description = "Modifica un turno según el ID proporcionado. Si no existe el turno, lanza una excepción.")
     @PutMapping("/{turnoId}")
-    public ResponseEntity<Object> modifyTurno(@RequestBody ModificarTurnoRequest turnoRequest) throws TurnoInexistenteException{
-        // Paciente result = pacienteService.modifyPaciente(pacienteRequest.getId(), pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
-        // return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
-        return null;
+    public ResponseEntity<Object> modifyTurno(@RequestBody ModificarTurnoRequest turnoRequest) throws TurnoInexistenteException, PacienteInexistenteException, EstadoInexistenteException, ProfesionalInexistenteException, ImagenInexistenteException{
+        Turno result = turnoService.modifyTurno(
+                turnoRequest.getId(),
+                turnoRequest.getFecha(),
+                turnoRequest.getHora(),
+                turnoRequest.getIdPaciente(),
+                turnoRequest.getIdProfesional(),
+                turnoRequest.getIdEstado(),
+                turnoRequest.getIdImagenes());
+        return ResponseEntity.created(URI.create("/turno/" + result.getId())).body(result);
     }
 
     @Operation(summary = "Eliminar un turno", description = "Elimina un turno según el ID proporcionado. Si no existe el turno, lanza una excepción.")
     @DeleteMapping("/{turnoId}")
-    public void deleteTurno(@RequestBody EliminarTurnosRequest turnoRequest) throws TurnoInexistenteException{
-        // hacer funcion
+    public ResponseEntity<Void> deleteTurno(@RequestBody EliminarTurnosRequest turnoRequest) throws TurnoInexistenteException{
+        turnoService.deleteTurno(turnoRequest.getId());
+        return ResponseEntity.noContent().build();
     }
 }
