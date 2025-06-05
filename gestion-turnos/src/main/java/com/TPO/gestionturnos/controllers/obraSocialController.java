@@ -68,7 +68,7 @@ public class obraSocialController {
     @PutMapping("/{obraSocialId}")
     public ResponseEntity<Object> modifyObraSocial(@RequestBody ModificarObraSocialRequest obraSocialRequest) throws ObraSocialInexistenteException{
         ObraSocial result = obraSocialService.modifyObraSocial(obraSocialRequest.getId(), obraSocialRequest.getNombre());
-        return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
+        return ResponseEntity.created(URI.create("/obraSocial/" + result.getId())).body(result);
     }
 
     @Operation(summary = "Eliminar una obra social", description = "Elimina una obra social según el ID proporcionado. Si no existe la obra social, lanza una excepción.")

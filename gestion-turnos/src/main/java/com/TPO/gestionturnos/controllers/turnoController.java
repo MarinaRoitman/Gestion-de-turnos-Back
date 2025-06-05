@@ -26,7 +26,7 @@ import com.TPO.gestionturnos.exceptions.TurnoInexistenteException;
 import com.TPO.gestionturnos.service.TurnoService;
 
 import io.swagger.v3.oas.annotations.Operation;
-import io.swagger.v3.oas.annotations.parameters.RequestBody;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @RestController
 @RequestMapping("/turno")

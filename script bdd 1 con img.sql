@@ -22,8 +22,8 @@ CREATE TABLE Profesional_Especialidad (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     fkProfesional BIGINT NOT NULL,
     fkEspecialidad BIGINT NOT NULL,
-    FOREIGN KEY (fkProfesional) REFERENCES Profesional(id),
-    FOREIGN KEY (fkEspecialidad) REFERENCES Especialidad(id)
+    FOREIGN KEY (fkProfesional) REFERENCES Profesional(id) ON DELETE CASCADE,
+    FOREIGN KEY (fkEspecialidad) REFERENCES Especialidad(id) ON DELETE CASCADE
 );
 
 -- Tabla Paciente
@@ -50,8 +50,8 @@ CREATE TABLE Turno (
     fecha DATE NOT NULL,
     hora TIME NOT NULL,
     notas TEXT,
-    FOREIGN KEY (fkPaciente) REFERENCES Paciente(id),
-    FOREIGN KEY (fkProfesional) REFERENCES Profesional(id),
+    FOREIGN KEY (fkPaciente) REFERENCES Paciente(id) ON DELETE CASCADE,
+    FOREIGN KEY (fkProfesional) REFERENCES Profesional(id) ON DELETE CASCADE,
     FOREIGN KEY (fkEstado) REFERENCES Estado(id)
 );
 
@@ -74,7 +74,7 @@ CREATE TABLE Plan (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre TEXT NOT NULL,
     fkObraSocial BIGINT NOT NULL,
-    FOREIGN KEY (fkObraSocial) REFERENCES ObraSocial(id)
+    FOREIGN KEY (fkObraSocial) REFERENCES ObraSocial(id) ON DELETE CASCADE
 );
 
 -- Tabla Afiliacion
@@ -98,8 +98,8 @@ CREATE TABLE Notificacion (
     fechaEnvio DATE NOT NULL,
     horaEnvio TIME NOT NULL,
     visible BOOLEAN NOT NULL DEFAULT true,
-    FOREIGN KEY (fkTurno) REFERENCES Turno(id),
-    FOREIGN KEY (fkPaciente) REFERENCES Paciente(id)
+    FOREIGN KEY (fkTurno) REFERENCES Turno(id) ON DELETE CASCADE,
+    FOREIGN KEY (fkPaciente) REFERENCES Paciente(id) ON DELETE CASCADE
 );
 
 -- Inserción de datos

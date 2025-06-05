@@ -94,7 +94,7 @@ public class profesionalController {
     }
 
     @Operation(summary = "Agrega una especialidad a un profesional", description = "Agrega la especialidad cuyo ID sea el ingresado al profesional. Si ya la tiene, no hace nada.")
-    @PutMapping("agregar")
+    @PutMapping("/agregar")
     public ResponseEntity<Object> addEspecialidad(@RequestBody AgregarEliminarEspecialidadRequest profesionalRequest)
         throws ProfesionalInexistenteException, EspecialidadInexistenteException {
         Profesional result = profesionalService.addEspecialidad(profesionalRequest.getProfesionalId(), profesionalRequest.getEspecialidadId());
@@ -102,7 +102,7 @@ public class profesionalController {
     }
 
     @Operation(summary = "Elimina una especialidad a un profesional", description = "Elimina la especialidad cuyo ID sea el ingresado del profesional. Si no la tiene, no hace nada.")
-    @PutMapping("eliminar")
+    @PutMapping("/eliminar")
     public ResponseEntity<Object> deleteEspecialidad(@RequestBody AgregarEliminarEspecialidadRequest profesionalRequest)
         throws ProfesionalInexistenteException, EspecialidadInexistenteException {
         Profesional result = profesionalService.deleteEspecialidad(profesionalRequest.getProfesionalId(), profesionalRequest.getEspecialidadId());
