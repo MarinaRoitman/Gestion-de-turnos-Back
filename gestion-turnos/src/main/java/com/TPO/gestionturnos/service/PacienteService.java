@@ -1,5 +1,6 @@
 package com.TPO.gestionturnos.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -12,9 +13,9 @@ public interface PacienteService {
 
     public List<Paciente> getPacientes();
     
-    public Paciente createPaciente(String nombre, String apellido, String mail, String password) throws PacienteExistenteException;
+    public Paciente createPaciente(String nombre, String apellido, String mail, String password, String dni, LocalDate fechaNacimiento, String telefono) throws PacienteExistenteException;
 
-    public Paciente modifyPaciente(Long id, String nombre, String apellido, String mail, String password) throws PacienteInexistenteException;
+    public Paciente modifyPaciente(Long id, String nombre, String apellido, String mail, String password, String dni, LocalDate fechaNacimiento, String telefono) throws PacienteInexistenteException;
 
     public Paciente recoverPassword(String mail) throws PacienteInexistenteException;
 

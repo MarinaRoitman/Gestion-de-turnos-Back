@@ -1,10 +1,15 @@
 package com.TPO.gestionturnos.entity.DTOs;
 
+import java.time.LocalDate;
+
 public class NuevoPacienteRequest {
     private String nombre;
     private String apellido;
     private String mail;
     private String password;
+    private String dni;
+    private LocalDate fechaNacimiento;
+    private String telefono;
 
     public NuevoPacienteRequest() {
         
@@ -40,6 +45,30 @@ public class NuevoPacienteRequest {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+    
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 
     @Override

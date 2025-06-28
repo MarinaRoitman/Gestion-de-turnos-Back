@@ -1,6 +1,8 @@
 package com.TPO.gestionturnos.entity;
 
 import jakarta.persistence.*;
+
+import java.time.LocalDate;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
@@ -19,11 +21,20 @@ public class Paciente {
     @Column(nullable = false)
     private String apellido;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String mail;
 
     @Column(name = "contrasena", nullable = false)
     private String password;
+
+    @Column(nullable = false, unique = true)
+    private String dni;
+
+    @Column(nullable = false)
+    private LocalDate fechaNacimiento;
+
+    @Column(nullable = false)
+    private String telefono;
 
     @OneToMany(mappedBy = "paciente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     @JsonManagedReference
@@ -37,11 +48,15 @@ public class Paciente {
     public Paciente() {}
 
     // Constructor personalizado
-    public Paciente(String nombre, String apellido, String mail, String password) {
+    public Paciente(Long id, String nombre, String apellido, String mail, String password, String dni, LocalDate fechaNacimiento, String telefono) {
+        this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
         this.mail = mail;
         this.password = password;
+        this.dni = dni;
+        this.fechaNacimiento = fechaNacimiento;
+        this.telefono = telefono;
     }
 
     // Otro constructor opcional si lo necesitás
@@ -109,5 +124,29 @@ public class Paciente {
 
     public void setTurnos(List<Turno> turnos) {
         this.turnos = turnos;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public LocalDate getFechaNacimiento() {
+        return fechaNacimiento;
+    }
+
+    public void setFechaNacimiento(LocalDate fechaNacimiento) {
+        this.fechaNacimiento = fechaNacimiento;
+    }
+
+    public String getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(String telefono) {
+        this.telefono = telefono;
     }
 }

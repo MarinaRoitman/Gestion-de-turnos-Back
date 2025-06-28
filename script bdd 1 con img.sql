@@ -32,7 +32,10 @@ CREATE TABLE Paciente (
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
     mail TEXT,
-    contrasena TEXT NOT NULL
+    contrasena TEXT NOT NULL,
+    telefono TEXT,
+    dni TEXT,
+    fechaNacimiento DATE
 );
 
 -- Tabla Estado
@@ -117,10 +120,10 @@ INSERT INTO Profesional_Especialidad (fkProfesional, fkEspecialidad) VALUES
 (2, 2),          -- Maru solo Pediatría
 (3, 3);          -- Caro solo Dermatología
 
-INSERT INTO Paciente (nombre, apellido, mail, contrasena) VALUES
-('Martis', 'Fede', 'mfede@gmail.com', '1234'),
-('Jorge', 'Lopez', 'maria.lopez@gmail.com', 'abcd'),
-('Mert', 'Mamerto', 'memerto@gmail.com', 'pass');
+INSERT INTO Paciente (nombre, apellido, mail, contrasena, dni, fechaNacimiento, telefono) VALUES
+('Martis', 'Fede', 'mfede@gmail.com', '1234', '44788121', '2003-12-20', '1122445566'),
+('Jorge', 'Lopez', 'maria.lopez@gmail.com', 'abcd', , '00000000', '2000-01-01', '0000000000'),
+('Mert', 'Mamerto', 'memerto@gmail.com', 'pass', '44232212', '1995-03-27', '1177788899');
 
 INSERT INTO ObraSocial (nombre) VALUES ('OSDE'), ('Swiss Medical'), ('PAMI');
 

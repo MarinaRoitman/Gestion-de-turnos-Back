@@ -1,5 +1,6 @@
 package com.TPO.gestionturnos.service;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -26,7 +27,7 @@ public class PacienteServiceImpl implements PacienteService {
     }
 
     @Override
-    public Paciente createPaciente(String nombre, String apellido, String mail, String password) throws PacienteExistenteException {
+    public Paciente createPaciente(String nombre, String apellido, String mail, String password, String dni, LocalDate fechaNacimiento, String telefono) throws PacienteExistenteException {
         // if (mail == null || mail.trim().isEmpty()) {
         //     throw new IllegalArgumentException("El correo electrónico no puede ser nulo o vacío");
         // }
@@ -37,12 +38,12 @@ public class PacienteServiceImpl implements PacienteService {
             throw new PacienteExistenteException();  // Si ya existe un paciente con el mismo correo
         }
 
-        return pacienteRepository.save(new Paciente(nombre, apellido, mail, password));
+        return pacienteRepository.save(new Paciente(null, nombre, apellido, mail, password, dni, fechaNacimiento, telefono));
     }
 
         
     @Override
-    public Paciente modifyPaciente(Long id, String nombre, String apellido, String mail, String password) throws PacienteInexistenteException {
+    public Paciente modifyPaciente(Long id, String nombre, String apellido, String mail, String password, String dni, LocalDate fechaNacimiento, String telefono) throws PacienteInexistenteException {
         Optional<Paciente> pacienteOriginal = pacienteRepository.findById(id);
 
         if (pacienteOriginal.isEmpty()) {
@@ -56,6 +57,9 @@ public class PacienteServiceImpl implements PacienteService {
         if (apellido != null) paciente.setApellido(apellido);
         if (mail != null) paciente.setMail(mail.toLowerCase());
         if (password != null) paciente.setPassword(password);
+        if (dni != null) paciente.setDni(dni);
+        if (fechaNacimiento != null) paciente.setFechaNacimiento(fechaNacimiento);
+        if (telefono != null) paciente.setTelefono(telefono);
 
         return pacienteRepository.save(paciente);
     }

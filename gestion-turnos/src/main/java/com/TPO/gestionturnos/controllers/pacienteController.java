@@ -67,7 +67,7 @@ public class pacienteController {
     @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Datos del nuevo paciente a crear")
     @RequestBody NuevoPacienteRequest pacienteRequest)
     throws PacienteExistenteException {
-        Paciente result = pacienteService.createPaciente(pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
+        Paciente result = pacienteService.createPaciente(pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword(), pacienteRequest.getDni(), pacienteRequest.getFechaNacimiento(), pacienteRequest.getTelefono());
         return ResponseEntity.created(URI.create("/paciente/" + result.getId())).body(result);
     }
 
@@ -87,7 +87,7 @@ public class pacienteController {
     public ResponseEntity<Object> modifyPaciente(
     @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Mail y password del paciente iniciando sesion")
     @RequestBody ModificarPacienteRequest pacienteRequest) throws PacienteInexistenteException{
-        Paciente result = pacienteService.modifyPaciente(pacienteRequest.getId(), pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword());
+        Paciente result = pacienteService.modifyPaciente(pacienteRequest.getId(), pacienteRequest.getNombre(), pacienteRequest.getApellido(), pacienteRequest.getMail(), pacienteRequest.getPassword(), pacienteRequest.getDni(), pacienteRequest.getFechaNacimiento(), pacienteRequest.getTelefono());
         return ResponseEntity.created(URI.create("/usuarios/" + result.getId())).body(result);
     }
     
