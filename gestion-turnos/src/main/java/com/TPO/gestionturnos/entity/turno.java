@@ -35,7 +35,7 @@ public class Turno {
     @JoinColumn(name = "fkEstado")
     private Estado estado;
 
-    @OneToMany(mappedBy = "turno", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "turno", cascade = CascadeType.ALL, orphanRemoval = false)
     @JsonManagedReference
     private List<Imagen> imagenes = new ArrayList<>();
 
