@@ -100,7 +100,8 @@ public class turnoController {
                 turnoRequest.getIdPaciente(),
                 turnoRequest.getIdProfesional(),
                 turnoRequest.getIdEstado(),
-                turnoRequest.getIdImagenes());
+                turnoRequest.getIdImagenes(),
+                turnoRequest.getNotas());
         return ResponseEntity.created(URI.create("/turno/" + result.getId())).body(result);
     }
 
@@ -114,7 +115,8 @@ public class turnoController {
                 turnoRequest.getIdPaciente(),
                 turnoRequest.getIdProfesional(),
                 turnoRequest.getIdEstado(),
-                turnoRequest.getIdImagenes());
+                turnoRequest.getIdImagenes(),
+                turnoRequest.getNotas());
         return ResponseEntity.created(URI.create("/turno/" + result.getId())).body(result);
     }
 

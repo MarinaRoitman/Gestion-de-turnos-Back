@@ -129,7 +129,7 @@ public class TurnoServiceImpl implements TurnoService {
 
     @Override
     public Turno createTurno(LocalDate fecha, LocalTime hora, Long idPaciente, Long idProfesional, Long idEstado,
-            List<Long> imagenes)
+            List<Long> imagenes, String notas)
             throws PacienteInexistenteException, EstadoInexistenteException, ProfesionalInexistenteException, ImagenInexistenteException {
         
         Optional<Paciente> paciente = pacienteRepository.findById(idPaciente);
@@ -163,12 +163,13 @@ public class TurnoServiceImpl implements TurnoService {
         turno.setProfesional(profesional.get());
         turno.setEstado(estado.get());
         turno.setImagenes(imagenesList);
+        turno.setNotas(notas);
         return turnosRepository.save(turno);
     }
 
     @Override
     public Turno modifyTurno(Long idTurno, LocalDate fecha, LocalTime hora, Long idPaciente, Long idProfesional,
-            Long idEstado, List<Long> imagenes) throws TurnoInexistenteException, PacienteInexistenteException,
+            Long idEstado, List<Long> imagenes, String notas) throws TurnoInexistenteException, PacienteInexistenteException,
             EstadoInexistenteException, ProfesionalInexistenteException, ImagenInexistenteException {
         Optional<Turno> turnoOriginal = turnosRepository.findById(idTurno);
         if (turnoOriginal.isEmpty()) {
@@ -209,6 +210,7 @@ public class TurnoServiceImpl implements TurnoService {
             }
             turno.setImagenes(imagenesList);
         }
+        if (notas != null) turno.setNotas(notas);
         return turnosRepository.save(turno);
     }    
 }

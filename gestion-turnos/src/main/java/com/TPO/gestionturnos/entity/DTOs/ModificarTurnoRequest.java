@@ -14,4 +14,5 @@ public class ModificarTurnoRequest {
     private Long idProfesional;
     private Long idEstado;
     private List<Long> idImagenes;
+    private String notas;
 }

@@ -38,7 +38,7 @@ public interface TurnoService {
 
     public void deleteTurno(Long id) throws TurnoInexistenteException;
 
-    public Turno createTurno(LocalDate fecha, LocalTime hora, Long idPaciente, Long idProfesional, Long idEstado, List<Long> imagenes) throws PacienteInexistenteException, EstadoInexistenteException, ProfesionalInexistenteException, ImagenInexistenteException;
+    public Turno createTurno(LocalDate fecha, LocalTime hora, Long idPaciente, Long idProfesional, Long idEstado, List<Long> imagenes, String notas) throws PacienteInexistenteException, EstadoInexistenteException, ProfesionalInexistenteException, ImagenInexistenteException;
 
-    public Turno modifyTurno(Long idTurno, LocalDate fecha, LocalTime hora, Long idPaciente, Long idProfesional, Long idEstado, List<Long> imagenes) throws TurnoInexistenteException, PacienteInexistenteException, EstadoInexistenteException, ProfesionalInexistenteException, ImagenInexistenteException;
+    public Turno modifyTurno(Long idTurno, LocalDate fecha, LocalTime hora, Long idPaciente, Long idProfesional, Long idEstado, List<Long> imagenes, String notas) throws TurnoInexistenteException, PacienteInexistenteException, EstadoInexistenteException, ProfesionalInexistenteException, ImagenInexistenteException;
 }

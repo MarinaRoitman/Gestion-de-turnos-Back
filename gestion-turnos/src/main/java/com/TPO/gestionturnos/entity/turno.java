@@ -39,6 +39,9 @@ public class Turno {
     @JsonManagedReference
     private List<Imagen> imagenes = new ArrayList<>();
 
+    @Column(name = "notas")
+private String notas;
+
     // Getters y setters
 
     public Long getId() {
@@ -95,5 +98,13 @@ public class Turno {
 
     public void setImagenes(List<Imagen> imagenes) {
         this.imagenes = imagenes;
+    }
+
+    public String getNotas() {
+        return notas;
+    }
+
+    public void setNotas(String notas) {
+        this.notas = notas;
     }
 }

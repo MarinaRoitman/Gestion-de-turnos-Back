@@ -14,7 +14,8 @@ CREATE TABLE Profesional (
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
     mail TEXT NOT NULL,
-    matricula TEXT NOT NULL
+    matricula TEXT NOT NULL,
+    foto longblob
 );
 
 -- Tabla intermedia Profesional_Especialidad

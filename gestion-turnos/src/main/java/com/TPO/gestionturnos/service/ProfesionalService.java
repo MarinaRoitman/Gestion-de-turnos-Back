@@ -19,9 +19,9 @@ public interface ProfesionalService {
 
     public Optional<List<Profesional>> getProfesionalesByNombre(String profesionalNombre);
 
-    public Profesional createProfesional(String nombre, String apellido, String mail, String matricula) throws ProfesionalExistenteException;
+    public Profesional createProfesional(String nombre, String apellido, String mail, String matricula, byte[] foto) throws ProfesionalExistenteException;
 
-    public Profesional modifyProfesional(Long id, String nombre, String apellido, String mail, String matricula) throws ProfesionalInexistenteException;
+    public Profesional modifyProfesional(Long id, String nombre, String apellido, String mail, String matricula, byte[] foto) throws ProfesionalInexistenteException;
 
     public void deleteProfesional(Long id) throws ProfesionalInexistenteException;
 

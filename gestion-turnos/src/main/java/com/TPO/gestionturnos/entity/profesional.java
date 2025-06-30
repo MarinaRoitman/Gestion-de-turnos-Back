@@ -30,6 +30,10 @@ public class Profesional {
     @OneToMany(mappedBy = "profesional", cascade = CascadeType.ALL)
     private List<Turno> turnos;
 
+    @Lob
+    @Column(name = "foto")
+    private byte[] foto;
+
     public Profesional() {
     }
 
@@ -96,5 +100,14 @@ public class Profesional {
 
     public void setTurnos(List<Turno> turnos) {
         this.turnos = turnos;
+    }
+
+    
+    public byte[] getFoto() {
+        return foto;
+    }
+
+    public void setFoto(byte[] foto) {
+        this.foto = foto;
     }
 }

@@ -1,5 +1,6 @@
 package com.TPO.gestionturnos.controllers;
 import java.net.URI;
+import java.util.Base64;
 import java.util.List;
 import java.util.Optional;
 
@@ -64,11 +65,17 @@ public class profesionalController {
     @Operation(summary = "Crear un profesional", description = "Crea un nuevo profesional en el sistema con nombre, apellido, mail y nroMatricula. Si el mail o nroMatricula ya existe, lanza una excepción.")
     @PostMapping
     public ResponseEntity<Object> createProfesional(@RequestBody CrearProfesionalRequest profesionalRequest) throws ProfesionalExistenteException {
+        byte[] fotoBytes = null;
+        if (profesionalRequest.getFotoBase64() != null && !profesionalRequest.getFotoBase64().isEmpty()) {
+            fotoBytes = Base64.getDecoder().decode(profesionalRequest.getFotoBase64());
+        }
+
         Profesional result = profesionalService.createProfesional(
             profesionalRequest.getNombre(),
             profesionalRequest.getApellido(),
             profesionalRequest.getMail(),
-            profesionalRequest.getMatricula()
+            profesionalRequest.getMatricula(),
+            fotoBytes
         );
         return ResponseEntity.created(URI.create("/profesional/" + result.getId())).body(result);
     }
@@ -76,12 +83,18 @@ public class profesionalController {
     @Operation(summary = "Modificar un profesional", description = "Modifica los datos de un profesional ya registrado (nombre, apellido, mail y/o matricula) según el ID proporcionado. Si no existe el profesional, lanza una excepción.")
     @PutMapping("/{profesionalId}")
     public ResponseEntity<Object> modifyProfesional(@RequestBody ModificarProfesionalRequest profesionalRequest) throws ProfesionalInexistenteException{
+        byte[] fotoBytes = null;
+        if (profesionalRequest.getFotoBase64() != null && !profesionalRequest.getFotoBase64().isEmpty()) {
+            fotoBytes = Base64.getDecoder().decode(profesionalRequest.getFotoBase64());
+        }
+
         Profesional result = profesionalService.modifyProfesional(
             profesionalRequest.getId(),
             profesionalRequest.getNombre(),
             profesionalRequest.getApellido(),
             profesionalRequest.getMail(),
-            profesionalRequest.getMatricula()
+            profesionalRequest.getMatricula(),
+            fotoBytes
         );
         return ResponseEntity.created(URI.create("/profesional/" + result.getId())).body(result);
     }
