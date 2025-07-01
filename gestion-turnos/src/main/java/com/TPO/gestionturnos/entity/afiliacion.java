@@ -28,18 +28,23 @@ public class Afiliacion {
     @JsonBackReference
     private ObraSocial obraSocial;
 
+    @ManyToOne
+    @JoinColumn(name = "fkPlan")
+    private Plan plan;
+
     public Afiliacion(){
         
     }
     // Getters y setters
 
     public Afiliacion(String nroAfiliado, LocalDate fechaAlta, LocalDate fechaFin, Paciente paciente,
-            ObraSocial obraSocial) {
+                  ObraSocial obraSocial, Plan plan) {
         this.nroAfiliado = nroAfiliado;
         this.fechaAlta = fechaAlta;
         this.fechaFin = fechaFin;
         this.paciente = paciente;
         this.obraSocial = obraSocial;
+        this.plan = plan;
     }
 
     public Long getId() {
@@ -88,5 +93,13 @@ public class Afiliacion {
 
     public void setObraSocial(ObraSocial obraSocial) {
         this.obraSocial = obraSocial;
+    }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 }

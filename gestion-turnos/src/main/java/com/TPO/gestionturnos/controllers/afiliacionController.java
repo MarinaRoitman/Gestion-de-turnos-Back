@@ -23,6 +23,7 @@ import com.TPO.gestionturnos.exceptions.AfiliacionInexistenteException;
 import com.TPO.gestionturnos.exceptions.AfiliacionNoCreadaException;
 import com.TPO.gestionturnos.exceptions.ObraSocialInexistenteException;
 import com.TPO.gestionturnos.exceptions.PacienteInexistenteException;
+import com.TPO.gestionturnos.exceptions.PlanInexistenteException;
 import com.TPO.gestionturnos.service.AfiliacionService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -61,17 +62,31 @@ public class afiliacionController {
 
     @Operation(summary = "Crear una afiliacion", description = "Crea una nueva afiliacion en el sistema con el nroAfiliado, fkObraSocial, fkPaciente, fechaAlta, fechaFin. Si la afiliacion ya existe, lanza una excepción.")
     @PostMapping
-    public ResponseEntity<Object> createAfiliacion(@RequestBody CrearAfiliacionRequest afiliacionRequest) throws AfiliacionIncompatibleException, AfiliacionNoCreadaException {
-        Afiliacion result = afiliacionService.createAfiliacion(afiliacionRequest.getNroAfiliado(), afiliacionRequest.getFechaAlta(), afiliacionRequest.getFechaFin(), afiliacionRequest.getIdPaciente(), afiliacionRequest.getIdObraSocial());
+    public ResponseEntity<Object> createAfiliacion(@RequestBody CrearAfiliacionRequest afiliacionRequest) throws AfiliacionIncompatibleException, AfiliacionNoCreadaException, ObraSocialInexistenteException, PacienteInexistenteException, PlanInexistenteException {
+        Afiliacion result = afiliacionService.createAfiliacion(
+            afiliacionRequest.getNroAfiliado(),
+            afiliacionRequest.getFechaAlta(),
+            afiliacionRequest.getFechaFin(),
+            afiliacionRequest.getIdPaciente(),
+            afiliacionRequest.getIdObraSocial(),
+            afiliacionRequest.getIdPlan()
+        );
         return ResponseEntity.created(URI.create("/afiliacion/" + result.getId())).body(result);
     }
 
-    // hacer que este metodo sea privado, hacer void?
     @Operation(summary = "Modificar una afiliacion", description = "Modifica la afiliacion según el ID proporcionado. Si no existe la afiliacion, lanza una excepción.")
     @PutMapping("/{afiliacionId}")
-    public ResponseEntity<Object> modifyAfiliacion(@RequestBody ModificarAfiliacionRequest afiliacionRequest) throws AfiliacionInexistenteException, ObraSocialInexistenteException{
-        Afiliacion result = afiliacionService.modifyAfiliacion(afiliacionRequest.getId(), afiliacionRequest.getNroAfiliado(), afiliacionRequest.getFechaAlta(), afiliacionRequest.getFechaFin(), afiliacionRequest.getIdObraSocial());
-        return ResponseEntity.created(URI.create("/plan/" + result.getId())).body(result);
+    public ResponseEntity<Object> modifyAfiliacion(@RequestBody ModificarAfiliacionRequest afiliacionRequest) 
+    throws AfiliacionInexistenteException, AfiliacionNoCreadaException, ObraSocialInexistenteException, PacienteInexistenteException, PlanInexistenteException {
+        Afiliacion result = afiliacionService.modifyAfiliacion(
+            afiliacionRequest.getId(),
+            afiliacionRequest.getNroAfiliado(),
+            afiliacionRequest.getFechaAlta(),
+            afiliacionRequest.getFechaFin(),
+            afiliacionRequest.getIdObraSocial(),
+            afiliacionRequest.getIdPlan()
+        );
+        return ResponseEntity.ok(result);
     }
 
     @Operation(summary = "Eliminar una afiliacion", description = "Elimina una afiliacion según el ID proporcionado. Si no existe la afiliacion, lanza una excepción.")

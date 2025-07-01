@@ -10,4 +10,5 @@ public class CrearAfiliacionRequest {
     private LocalDate fechaFin;
     private Long idPaciente;
     private Long idObraSocial;
+    private Long idPlan;
 }

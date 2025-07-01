@@ -10,6 +10,7 @@ import com.TPO.gestionturnos.exceptions.AfiliacionInexistenteException;
 import com.TPO.gestionturnos.exceptions.AfiliacionNoCreadaException;
 import com.TPO.gestionturnos.exceptions.ObraSocialInexistenteException;
 import com.TPO.gestionturnos.exceptions.PacienteInexistenteException;
+import com.TPO.gestionturnos.exceptions.PlanInexistenteException;
 
 public interface AfiliacionService {
 
@@ -21,9 +22,9 @@ public interface AfiliacionService {
 
     public Optional<List<Afiliacion>> getAfiliacionesByPaciente(Long pacienteId) throws PacienteInexistenteException;
 
-    public Afiliacion createAfiliacion(String nroAfiliado, LocalDate fechaAlta, LocalDate fechaFin, Long idPaciente, Long idObraSocial) throws AfiliacionIncompatibleException, AfiliacionNoCreadaException;
+    public Afiliacion createAfiliacion(String nroAfiliado, LocalDate fechaAlta, LocalDate fechaFin, Long idPaciente, Long idObraSocial, Long idPlan) throws AfiliacionIncompatibleException, AfiliacionNoCreadaException, ObraSocialInexistenteException, PacienteInexistenteException, PlanInexistenteException;
 
-    public Afiliacion modifyAfiliacion(Long id, String nroAfiliado, LocalDate fechaAlta, LocalDate fechaFin, Long idObraSocial) throws AfiliacionInexistenteException, ObraSocialInexistenteException;
+    public Afiliacion modifyAfiliacion(Long id, String nroAfiliado, LocalDate fechaAlta, LocalDate fechaFin, Long idObraSocial, Long idPlan) throws AfiliacionInexistenteException, AfiliacionNoCreadaException, ObraSocialInexistenteException, PacienteInexistenteException, PlanInexistenteException;
 
     public void deleteAfiliacion(Long id) throws AfiliacionInexistenteException;
 }

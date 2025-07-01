@@ -11,4 +11,5 @@ public class ModificarAfiliacionRequest {
     private LocalDate fechaAlta;
     private LocalDate fechaFin;
     private Long idObraSocial;
+    private Long idPlan;
 }

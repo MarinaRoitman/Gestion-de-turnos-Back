@@ -89,6 +89,8 @@ CREATE TABLE Afiliacion (
     fkPaciente BIGINT NOT NULL,
     fechaAlta DATE NOT NULL,
     fechaFin DATE,
+    fkPlan BIGINT,
+    FOREIGN KEY (fkPlan) REFERENCES Plan(id) ON DELETE SET NULL ON UPDATE CASCADE,
     FOREIGN KEY (fkObraSocial) REFERENCES ObraSocial(id) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (fkPaciente) REFERENCES Paciente(id) ON DELETE CASCADE ON UPDATE CASCADE
 );
@@ -134,10 +136,10 @@ INSERT INTO Plan (nombre, fkObraSocial) VALUES
 ('Plan SMG20', 2),
 ('Plan Jubilados', 3);
 
-INSERT INTO Afiliacion (nroAfiliado, fkObraSocial, fkPaciente, fechaAlta, fechaFin) VALUES
-('AF123456', 1, 1, '2023-01-01', '2024-06-15'),
-('AF654321', 2, 2, '2022-06-15', '2025-01-31'),
-('AF112233', 3, 3, '2023-11-10', '2024-12-31');
+INSERT INTO Afiliacion (nroAfiliado, fkObraSocial, fkPaciente, fechaAlta, fechaFin, fkPlan) VALUES
+('AF123456', 1, 1, '2023-01-01', '2024-06-15', 1), -- OSDE → Plan 210
+('AF654321', 2, 2, '2022-06-15', '2025-01-31', 3), -- Swiss → SMG20
+('AF112233', 3, 3, '2023-11-10', '2024-12-31', 4); -- PAMI → Jubilados
 
 INSERT INTO Turno (fkPaciente, fkProfesional, fkEstado, fecha, hora, notas) VALUES
 (1, 1, 3, '2025-04-10', '09:00:00', 'Consulta general'),
