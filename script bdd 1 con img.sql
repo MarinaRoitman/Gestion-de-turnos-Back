@@ -32,11 +32,11 @@ CREATE TABLE Paciente (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
     nombre TEXT NOT NULL,
     apellido TEXT NOT NULL,
-    mail TEXT,
+    mail TEXT NOT NULL,
     contrasena TEXT NOT NULL,
-    telefono TEXT,
-    dni TEXT,
-    fechaNacimiento DATE
+    telefono TEXT NOT NULL,
+    dni TEXT NOT NULL,
+    fechaNacimiento DATE NOT NULL
 );
 
 -- Tabla Estado
@@ -48,7 +48,7 @@ CREATE TABLE Estado (
 -- Tabla Turno
 CREATE TABLE Turno (
     id BIGINT AUTO_INCREMENT PRIMARY KEY,
-    fkPaciente BIGINT NOT NULL,
+    fkPaciente BIGINT,
     fkProfesional BIGINT NOT NULL,
     fkEstado BIGINT NOT NULL,
     fecha DATE NOT NULL,
@@ -125,7 +125,7 @@ INSERT INTO Profesional_Especialidad (fkProfesional, fkEspecialidad) VALUES
 
 INSERT INTO Paciente (nombre, apellido, mail, contrasena, dni, fechaNacimiento, telefono) VALUES
 ('Martis', 'Fede', 'mfede@gmail.com', '1234', '44788121', '2003-12-20', '1122445566'),
-('Jorge', 'Lopez', 'maria.lopez@gmail.com', 'abcd', , '00000000', '2000-01-01', '0000000000'),
+('Jorge', 'Lopez', 'jorge.lopez@gmail.com', 'abcd', '00000000', '2000-01-01', '0000000000'),
 ('Mert', 'Mamerto', 'memerto@gmail.com', 'pass', '44232212', '1995-03-27', '1177788899');
 
 INSERT INTO ObraSocial (nombre) VALUES ('OSDE'), ('Swiss Medical'), ('PAMI');
@@ -137,15 +137,29 @@ INSERT INTO Plan (nombre, fkObraSocial) VALUES
 ('Plan Jubilados', 3);
 
 INSERT INTO Afiliacion (nroAfiliado, fkObraSocial, fkPaciente, fechaAlta, fechaFin, fkPlan) VALUES
-('AF123456', 1, 1, '2023-01-01', '2024-06-15', 1), -- OSDE → Plan 210
-('AF654321', 2, 2, '2022-06-15', '2025-01-31', 3), -- Swiss → SMG20
-('AF112233', 3, 3, '2023-11-10', '2024-12-31', 4); -- PAMI → Jubilados
+('AF123456', 1, 1, '2023-01-01', '2024-06-15', 1), -- OSDE Plan 210
+('AF654321', 2, 2, '2022-06-15', '2025-01-31', 3), -- Swiss SMG20
+('AF112233', 3, 3, '2023-11-10', '2024-12-31', 4); -- PAMI Jubilados
 
 INSERT INTO Turno (fkPaciente, fkProfesional, fkEstado, fecha, hora, notas) VALUES
 (1, 1, 3, '2025-04-10', '09:00:00', 'Consulta general'),
-(2, 2, 2, '2025-03-25', '11:30:00', 'Control mensual'),
-(3, 3, 1, '2025-04-02', '15:00:00', 'Cancelado por el paciente');
+(1, 2, 2, '2025-03-25', '11:30:00', 'Control mensual'),
+(1, 3, 1, '2025-04-02', '15:00:00', 'Cancelado por el paciente');
 
+INSERT INTO turno (fkPaciente, fkProfesional, fkEstado, fecha, hora, notas) VALUES
+(null, 1, 4, '2025-07-10', '09:00:00', 'Disponible para consulta general'), -- Dr. Joaco (Cardio/Pediatría)
+(null, 1, 4, '2025-07-12', '10:30:00', 'Turno libre'),
+(null, 1, 4, '2025-07-15', '11:00:00', 'Consulta pediátrica'),
+
+(null, 2, 4, '2025-07-10', '13:00:00', 'Pediatría libre'), -- Dra. Maru (Pediatría)
+(null, 2, 4, '2025-07-14', '14:30:00', 'Chequeo general'),
+(null, 2, 4, '2025-07-20', '15:00:00', 'Control pediátrico'),
+
+(null, 3, 4, '2025-07-11', '08:30:00', 'Dermatología disponible'), -- Dra. Caro (Dermatología)
+(null, 3, 4, '2025-07-13', '10:00:00', 'Consulta dermatológica'),
+(null, 3, 4, '2025-07-16', '11:45:00', 'Atención de rutina');
+
+/*
 -- Inserciones de notificaciones
 INSERT INTO Notificacion (texto, fkTurno, fkPaciente, fechaEnvio, horaEnvio, visible) VALUES
 ('Recordatorio: Tiene un turno reservado para el 10/04/2025 a las 09:00.', 1, 1, '2025-04-09', '10:00:00', true),
@@ -154,3 +168,4 @@ INSERT INTO Notificacion (texto, fkTurno, fkPaciente, fechaEnvio, horaEnvio, vis
 ('Nuevo turno disponible con Dr. Joaco el 15/04/2025.', 1, 1, '2025-04-05', '08:30:00', true),
 ('Se ha modificado el estado de su turno. Ahora está marcado como cumplido.', 2, 2, '2025-03-26', '09:15:00', false),
 ('Recordatorio: No olvide traer estudios previos a la consulta.', 1, 1, '2025-04-09', '18:45:00', true);
+*/
