@@ -17,12 +17,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.TPO.gestionturnos.entity.Turno;
 import com.TPO.gestionturnos.entity.DTOs.EliminarTurnosRequest;
 import com.TPO.gestionturnos.entity.DTOs.ModificarTurnoRequest;
+import com.TPO.gestionturnos.entity.DTOs.ReservarTurnoRequest;
 import com.TPO.gestionturnos.entity.DTOs.CrearTurnoRequest;
 import com.TPO.gestionturnos.exceptions.EstadoInexistenteException;
 import com.TPO.gestionturnos.exceptions.ImagenInexistenteException;
 import com.TPO.gestionturnos.exceptions.PacienteInexistenteException;
 import com.TPO.gestionturnos.exceptions.ProfesionalInexistenteException;
 import com.TPO.gestionturnos.exceptions.TurnoInexistenteException;
+import com.TPO.gestionturnos.exceptions.TurnoYaReservadoException;
 import com.TPO.gestionturnos.service.TurnoService;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -125,5 +127,19 @@ public class turnoController {
     public ResponseEntity<Void> deleteTurno(@RequestBody EliminarTurnosRequest turnoRequest) throws TurnoInexistenteException{
         turnoService.deleteTurno(turnoRequest.getId());
         return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "Reservar un turno", description = "Reserva un turno según el ID proporcionado y lo asigna al paciente según el ID proporcionado. Si no existe el turno o el paciente, lanza una excepción.")
+    @PutMapping("/reservar")
+    public ResponseEntity<Object> reservarTurno(@RequestBody ReservarTurnoRequest turnoRequest) throws TurnoInexistenteException, PacienteInexistenteException, EstadoInexistenteException, TurnoYaReservadoException  {
+        Turno turnoReservado = turnoService.reservarTurno(turnoRequest.getIdTurno(), turnoRequest.getIdPaciente());
+        return ResponseEntity.ok(turnoReservado);
+    }
+
+    @Operation(summary = "Cancelar un turno", description = "Cancela un turno manteniendo al paciente, y crea uno nuevo igual pero disponible.")
+    @PutMapping("/cancelar/{turnoId}")
+    public ResponseEntity<Object> cancelarTurno(@PathVariable Long turnoId) throws TurnoInexistenteException, EstadoInexistenteException {
+        Turno nuevoTurno = turnoService.cancelarTurno(turnoId);
+        return ResponseEntity.ok(nuevoTurno);
     }
 }

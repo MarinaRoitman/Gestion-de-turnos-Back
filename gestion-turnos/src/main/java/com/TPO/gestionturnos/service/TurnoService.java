@@ -16,6 +16,7 @@ import com.TPO.gestionturnos.exceptions.ImagenInexistenteException;
 import com.TPO.gestionturnos.exceptions.PacienteInexistenteException;
 import com.TPO.gestionturnos.exceptions.ProfesionalInexistenteException;
 import com.TPO.gestionturnos.exceptions.TurnoInexistenteException;
+import com.TPO.gestionturnos.exceptions.TurnoYaReservadoException;
 
 public interface TurnoService {
     public List<Turno> getTurnos();
@@ -41,4 +42,8 @@ public interface TurnoService {
     public Turno createTurno(LocalDate fecha, LocalTime hora, Long idPaciente, Long idProfesional, Long idEstado, List<Long> imagenes, String notas) throws PacienteInexistenteException, EstadoInexistenteException, ProfesionalInexistenteException, ImagenInexistenteException;
 
     public Turno modifyTurno(Long idTurno, LocalDate fecha, LocalTime hora, Long idPaciente, Long idProfesional, Long idEstado, List<Long> imagenes, String notas) throws TurnoInexistenteException, PacienteInexistenteException, EstadoInexistenteException, ProfesionalInexistenteException, ImagenInexistenteException;
+
+    public Turno reservarTurno(Long idTurno, Long idPaciente) throws TurnoInexistenteException, PacienteInexistenteException, EstadoInexistenteException, TurnoYaReservadoException ;
+
+    Turno cancelarTurno(Long turnoId) throws TurnoInexistenteException, EstadoInexistenteException;
 }

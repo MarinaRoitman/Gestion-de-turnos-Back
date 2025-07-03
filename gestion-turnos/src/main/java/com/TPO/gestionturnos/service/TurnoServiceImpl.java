@@ -19,6 +19,7 @@ import com.TPO.gestionturnos.exceptions.ImagenInexistenteException;
 import com.TPO.gestionturnos.exceptions.PacienteInexistenteException;
 import com.TPO.gestionturnos.exceptions.ProfesionalInexistenteException;
 import com.TPO.gestionturnos.exceptions.TurnoInexistenteException;
+import com.TPO.gestionturnos.exceptions.TurnoYaReservadoException;
 import com.TPO.gestionturnos.repository.EstadosRepository;
 import com.TPO.gestionturnos.repository.ImagenesRepository;
 import com.TPO.gestionturnos.repository.PacientesRepository;
@@ -213,4 +214,67 @@ public class TurnoServiceImpl implements TurnoService {
         if (notas != null) turno.setNotas(notas);
         return turnosRepository.save(turno);
     }    
+
+    @Override
+    public Turno reservarTurno(Long idTurno, Long idPaciente)
+        throws TurnoInexistenteException, PacienteInexistenteException, EstadoInexistenteException, TurnoYaReservadoException  {
+        Optional<Turno> turnoOpt = turnosRepository.findById(idTurno);
+        if (turnoOpt.isEmpty()) {
+            throw new TurnoInexistenteException();
+        }
+
+        Optional<Paciente> pacienteOpt = pacienteRepository.findById(idPaciente);
+        if (pacienteOpt.isEmpty()) {
+            throw new PacienteInexistenteException();
+        }
+
+        Turno turno = turnoOpt.get();
+        if (turno.getPaciente() != null) {
+            throw new TurnoYaReservadoException();
+        }
+
+        Optional<Estado> estadoReservado = estadosRepository.findById(3L); // ID 3 = Reservado
+        if (estadoReservado.isEmpty()) {
+            throw new EstadoInexistenteException();
+        }
+
+        turno.setPaciente(pacienteOpt.get());
+        turno.setEstado(estadoReservado.get());
+
+        return turnosRepository.save(turno);
+    }
+
+    @Override
+    public Turno cancelarTurno(Long turnoId) throws TurnoInexistenteException, EstadoInexistenteException {
+        Optional<Turno> turnoOriginalOpt = turnosRepository.findById(turnoId);
+
+        if (turnoOriginalOpt.isEmpty()) {
+            throw new TurnoInexistenteException();
+        }
+
+        Turno turnoOriginal = turnoOriginalOpt.get();
+
+        Optional<Estado> estadoCanceladoOpt = estadosRepository.findById(1L); // Id cancelado
+        if (estadoCanceladoOpt.isEmpty()) {
+            throw new EstadoInexistenteException();
+        }
+        turnoOriginal.setEstado(estadoCanceladoOpt.get());
+        turnosRepository.save(turnoOriginal);
+
+        Optional<Estado> estadoDisponibleOpt = estadosRepository.findById(4L); // Id disponible
+        if (estadoDisponibleOpt.isEmpty()) {
+            throw new EstadoInexistenteException();
+        }
+
+        Turno nuevoTurno = new Turno();
+        nuevoTurno.setFecha(turnoOriginal.getFecha());
+        nuevoTurno.setHora(turnoOriginal.getHora());
+        nuevoTurno.setPaciente(null); // El nuevo turno no tiene paciente
+        nuevoTurno.setProfesional(turnoOriginal.getProfesional());
+        nuevoTurno.setEstado(estadoDisponibleOpt.get());
+        nuevoTurno.setNotas(null); // El nuevo turno no tiene notas
+        nuevoTurno.setImagenes(null); // El nuevo turno no tiene imágenes
+
+        return turnosRepository.save(nuevoTurno);
+    }
 }
