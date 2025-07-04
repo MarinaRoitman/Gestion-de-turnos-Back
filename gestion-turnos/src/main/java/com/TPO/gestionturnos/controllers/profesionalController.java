@@ -75,6 +75,7 @@ public class profesionalController {
             profesionalRequest.getApellido(),
             profesionalRequest.getMail(),
             profesionalRequest.getMatricula(),
+            profesionalRequest.getDireccion(),
             fotoBytes
         );
         return ResponseEntity.created(URI.create("/profesional/" + result.getId())).body(result);
@@ -94,6 +95,7 @@ public class profesionalController {
             profesionalRequest.getApellido(),
             profesionalRequest.getMail(),
             profesionalRequest.getMatricula(),
+            profesionalRequest.getDireccion(),
             fotoBytes
         );
         return ResponseEntity.created(URI.create("/profesional/" + result.getId())).body(result);

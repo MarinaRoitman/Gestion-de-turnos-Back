@@ -9,5 +9,6 @@ public class ModificarProfesionalRequest {
     private String apellido;
     private String mail;
     private String matricula;
+    private String direccion;
     private String fotoBase64;
 }

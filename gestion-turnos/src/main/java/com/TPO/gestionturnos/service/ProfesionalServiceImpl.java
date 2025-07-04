@@ -54,21 +54,21 @@ public class ProfesionalServiceImpl implements ProfesionalService{
     }
 
     @Override
-    public Profesional createProfesional(String nombre, String apellido, String mail, String matricula, byte[] foto)
+    public Profesional createProfesional(String nombre, String apellido, String mail, String matricula, String direccion, byte[] foto)
             throws ProfesionalExistenteException {
         Optional<Profesional> profesionalOriginal = profesionalesRepository.findByMatricula(matricula);
         if (profesionalOriginal.isPresent()) {
             throw new ProfesionalExistenteException();
         }
 
-        Profesional profesional = new Profesional(nombre, apellido, matricula, mail);
+        Profesional profesional = new Profesional(nombre, apellido, matricula, mail, direccion);
         profesional.setFoto(foto);
 
         return profesionalesRepository.save(profesional);
     }
 
     @Override
-    public Profesional modifyProfesional(Long id, String nombre, String apellido, String mail, String matricula, byte[] foto)
+    public Profesional modifyProfesional(Long id, String nombre, String apellido, String mail, String matricula, String direccion, byte[] foto)
             throws ProfesionalInexistenteException {
         Optional<Profesional> profesionalOriginal = profesionalesRepository.findById(id);
         if (!profesionalOriginal.isPresent()) {
@@ -80,6 +80,7 @@ public class ProfesionalServiceImpl implements ProfesionalService{
         profesional.setApellido(apellido);
         profesional.setMail(mail);
         profesional.setMatricula(matricula);
+        profesional.setDireccion(direccion);
 
         if (foto != null && foto.length > 0) {
             profesional.setFoto(foto);

@@ -17,6 +17,9 @@ public class Notificacion {
     @Column(nullable = false, columnDefinition = "TEXT")
     private String texto;
 
+    @Column(nullable = false, columnDefinition = "TEXT")
+    private String titulo;
+
     @ManyToOne
     @JoinColumn(name = "fkTurno", nullable = false)
     @JsonBackReference
@@ -42,10 +45,11 @@ public class Notificacion {
         this.visible = true;
     }
 
-    public Notificacion(String texto, Turno turno, Paciente paciente) {
+    public Notificacion(String texto, Turno turno, Paciente paciente, String titulo) {
         this.texto = texto;
         this.turno = turno;
         this.paciente = paciente;
+        this.titulo = titulo;
         this.fechaEnvio = LocalDate.now();
         this.horaEnvio = LocalTime.now();
         this.visible = true;
@@ -67,6 +71,14 @@ public class Notificacion {
 
     public void setTexto(String texto) {
         this.texto = texto;
+    }
+
+    public String getTitulo() {
+        return titulo;
+    }
+
+    public void setTitulo(String titulo) {
+        this.titulo = titulo;
     }
 
     public Turno getTurno() {

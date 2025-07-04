@@ -17,6 +17,7 @@ public class Profesional {
     private String apellido;
     private String mail;
     private String matricula;
+    private String direccion;
 
     @ManyToMany
     @JoinTable(
@@ -37,11 +38,12 @@ public class Profesional {
     public Profesional() {
     }
 
-    public Profesional(String nombre, String apellido, String matricula, String mail) {
+    public Profesional(String nombre, String apellido, String matricula, String mail, String direccion) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.matricula = matricula;
         this.mail = mail;
+        this.direccion = direccion;
     }
 
     // Getters y setters
@@ -100,6 +102,14 @@ public class Profesional {
 
     public void setTurnos(List<Turno> turnos) {
         this.turnos = turnos;
+    }
+
+    public String getDireccion() {
+        return direccion;
+    }
+
+    public void setDireccion(String direccion) {
+        this.direccion = direccion;
     }
 
     

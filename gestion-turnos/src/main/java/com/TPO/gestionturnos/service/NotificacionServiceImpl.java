@@ -49,7 +49,7 @@ public class NotificacionServiceImpl implements NotificacionService {
     }
 
     @Override
-    public Notificacion createNotificacion(String texto, Long idTurno, Long idPaciente)
+    public Notificacion createNotificacion(String texto, Long idTurno, Long idPaciente, String titulo)
             throws PacienteInexistenteException, TurnoInexistenteException {
         Optional<Paciente> paciente = pacientesRepository.findById(idPaciente);
         if (!paciente.isPresent()) {
@@ -60,7 +60,7 @@ public class NotificacionServiceImpl implements NotificacionService {
         if (!turno.isPresent()) {
             throw new TurnoInexistenteException();
         }
-        return notificacionesRepository.save(new Notificacion(texto, turno.get(), paciente.get()));
+        return notificacionesRepository.save(new Notificacion(texto, turno.get(), paciente.get(), titulo));
     }
 
     @Override

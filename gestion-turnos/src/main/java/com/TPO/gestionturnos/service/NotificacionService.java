@@ -13,6 +13,6 @@ public interface NotificacionService {
     public Optional<Notificacion> getNotificacionById(Long notificacionId) throws NotificacionInexistenteException;
     public Optional<List<Notificacion>> getNotificacionesByPaciente(Long pacienteId) throws PacienteInexistenteException;
     public Optional<List<Notificacion>> getNotificacionesVisiblesByPaciente(Long pacienteId) throws PacienteInexistenteException;
-    public Notificacion createNotificacion(String texto, Long idTurno, Long idPaciente) throws PacienteInexistenteException, TurnoInexistenteException;
+    public Notificacion createNotificacion(String texto, Long idTurno, Long idPaciente, String titulo) throws PacienteInexistenteException, TurnoInexistenteException;
     public Long deleteNotificacion(Long id) throws NotificacionInexistenteException;
 }

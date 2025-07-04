@@ -98,6 +98,7 @@ CREATE TABLE Afiliacion (
 -- Tabla Notificacion
 CREATE TABLE Notificacion (
 	id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    titulo TEXT NOT NULL,
     texto TEXT NOT NULL,
     fkTurno BIGINT NOT NULL,
     fkPaciente BIGINT NOT NULL,
@@ -139,10 +140,10 @@ INSERT INTO Plan (nombre, fkObraSocial) VALUES
 INSERT INTO Afiliacion (nroAfiliado, fkObraSocial, fkPaciente, fechaAlta, fechaFin, fkPlan) VALUES
 ('AF123456', 1, 1, '2023-01-01', '2024-06-15', 1), -- OSDE Plan 210
 ('AF654321', 2, 2, '2022-06-15', '2025-01-31', 3), -- Swiss SMG20
-('AF112233', 3, 3, '2023-11-10', '2024-12-31', 4); -- PAMI Jubilados
+('AF112233', 2, 3, '2023-11-10', '2024-12-31', 4); -- PAMI Jubilados
 
 INSERT INTO Turno (fkPaciente, fkProfesional, fkEstado, fecha, hora, notas) VALUES
-(1, 1, 3, '2025-04-10', '09:00:00', 'Consulta general'),
+(1, 1, 3, '2025-04-10', '14:00:00', 'Consulta general'),
 (1, 2, 2, '2025-03-25', '11:30:00', 'Control mensual'),
 (1, 3, 1, '2025-04-02', '15:00:00', 'Cancelado por el paciente');
 
@@ -169,3 +170,15 @@ INSERT INTO Notificacion (texto, fkTurno, fkPaciente, fechaEnvio, horaEnvio, vis
 ('Se ha modificado el estado de su turno. Ahora está marcado como cumplido.', 2, 2, '2025-03-26', '09:15:00', false),
 ('Recordatorio: No olvide traer estudios previos a la consulta.', 1, 1, '2025-04-09', '18:45:00', true);
 */
+
+SET GLOBAL event_scheduler = ON;
+CREATE EVENT IF NOT EXISTS actualizar_turnos_cumplidos
+ON SCHEDULE EVERY 1 DAY
+STARTS CURRENT_TIMESTAMP
+DO
+BEGIN
+    UPDATE Turno
+    SET fkEstado = (SELECT id FROM Estado WHERE nombre = 'Cumplido')
+    WHERE fkEstado = (SELECT id FROM Estado WHERE nombre = 'Reservado')
+    AND fecha < CURDATE();
+END$$

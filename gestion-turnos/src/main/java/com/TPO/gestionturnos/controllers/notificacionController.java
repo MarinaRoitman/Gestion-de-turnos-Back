@@ -58,7 +58,7 @@ public class notificacionController {
     @Operation(summary = "Crear una notificacion", description = "Crea una nueva notificacion en el sistema con texto, idTurno, idPaciente, fecha y hora de envío. Si el paciente o el turno no existen, lanza una excepción")
     @PostMapping
     public ResponseEntity<Object> createNotificacion(@RequestBody NuevaNotificacionRequest notificacionRequest) throws PacienteInexistenteException, TurnoInexistenteException {
-        Notificacion result = notificacionService.createNotificacion(notificacionRequest.getTexto(), notificacionRequest.getIdTurno(), notificacionRequest.getIdPaciente());
+        Notificacion result = notificacionService.createNotificacion(notificacionRequest.getTexto(), notificacionRequest.getIdTurno(), notificacionRequest.getIdPaciente(), notificacionRequest.getTitulo());
         return ResponseEntity.created(URI.create("/notificaciones/" + result.getId())).body(result);
     }
     
