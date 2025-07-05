@@ -25,7 +25,6 @@ public class Afiliacion {
 
     @ManyToOne
     @JoinColumn(name = "fkObraSocial")
-    @JsonBackReference
     private ObraSocial obraSocial;
 
     @ManyToOne

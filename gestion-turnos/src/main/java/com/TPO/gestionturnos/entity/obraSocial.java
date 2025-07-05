@@ -3,6 +3,7 @@ package com.TPO.gestionturnos.entity;
 import jakarta.persistence.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 
 @Entity
@@ -16,7 +17,7 @@ public class ObraSocial {
     private String nombre;
 
     @OneToMany(mappedBy = "obraSocial", cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @JsonBackReference
     private List<Afiliacion> afiliaciones;
 
     @OneToMany(mappedBy = "obraSocial", cascade = CascadeType.ALL)
