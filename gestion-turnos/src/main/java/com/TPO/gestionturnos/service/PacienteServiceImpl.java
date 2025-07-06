@@ -5,6 +5,8 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.TPO.gestionturnos.entity.Paciente;
@@ -14,6 +16,7 @@ import com.TPO.gestionturnos.exceptions.PacienteLoginNoExitosoException;
 import com.TPO.gestionturnos.repository.PacientesRepository;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 
 
 @Service
@@ -108,5 +111,21 @@ public class PacienteServiceImpl implements PacienteService {
         // TODO Auto-generated method stub
         // hacer funcion
         throw new UnsupportedOperationException("Unimplemented method 'recoverPassword'");
+    }
+
+    @Autowired
+    private JavaMailSender mailSender;
+    
+    @Value("${spring.mail.username}")
+    private String fromEmail;
+
+    @Override
+    public void sendSimpleMessage(String to, String subject, String text) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setFrom(fromEmail);
+        message.setTo(to);
+        message.setSubject(subject);
+        message.setText(text);
+        mailSender.send(message);
     }
 }

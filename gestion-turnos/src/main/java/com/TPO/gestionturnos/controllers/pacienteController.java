@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.TPO.gestionturnos.entity.Paciente;
 import com.TPO.gestionturnos.entity.DTOs.EliminarPacienteRequest;
+import com.TPO.gestionturnos.entity.DTOs.EmailRequest;
 import com.TPO.gestionturnos.entity.DTOs.LoginPacienteRequest;
 import com.TPO.gestionturnos.entity.DTOs.ModificarPacienteRequest;
 import com.TPO.gestionturnos.entity.DTOs.ModificarPasswordRequest;
@@ -104,5 +106,15 @@ public class pacienteController {
     public ResponseEntity<Void> deletePaciente(@RequestBody EliminarPacienteRequest pacienteRequest) throws PacienteInexistenteException{
         pacienteService.deletePaciente(pacienteRequest.getId());
         return ResponseEntity.noContent().build();
+    }
+
+    @PostMapping("/enviar-correo")
+    public ResponseEntity<String> enviarCorreo(@RequestBody EmailRequest request) throws Exception {
+        try {
+            pacienteService.sendSimpleMessage(request.getTo(), request.getSubject(), request.getText());
+            return ResponseEntity.ok("Correo enviado correctamente");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error al enviar correo");
+        }
     }
 }

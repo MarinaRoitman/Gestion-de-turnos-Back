@@ -26,4 +26,6 @@ public interface PacienteService {
     public Long loginPaciente (String mail, String password) throws PacienteLoginNoExitosoException;
     
     public void deletePaciente(Long id) throws PacienteInexistenteException;
+
+    public void sendSimpleMessage(String to, String subject, String text) throws Exception;
 }
