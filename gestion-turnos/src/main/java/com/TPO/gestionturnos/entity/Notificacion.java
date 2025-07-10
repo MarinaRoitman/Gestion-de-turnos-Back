@@ -22,7 +22,7 @@ public class Notificacion {
 
     @ManyToOne
     @JoinColumn(name = "fkTurno", nullable = false)
-    @JsonBackReference
+    // @JsonBackReference
     private Turno turno;
 
     @ManyToOne
