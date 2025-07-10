@@ -15,6 +15,7 @@ CREATE TABLE Profesional (
     apellido TEXT NOT NULL,
     mail TEXT NOT NULL,
     matricula TEXT NOT NULL,
+    direccion TEXT,
     foto longblob
 );
 
@@ -114,10 +115,10 @@ INSERT INTO Estado (nombre) VALUES ('Cancelado'), ('Cumplido'), ('Reservado'), (
 
 INSERT INTO Especialidad (nombre) VALUES ('Cardiología'), ('Pediatría'), ('Dermatología');
 
-INSERT INTO Profesional (nombre, apellido, mail, matricula) VALUES
-('Joaco', 'Jawer', 'jjawer@gmail.com', 'MAT123'),
-('Maru', 'Roitman', 'mroitman@gmail.com', 'MAT456'),
-('Caro', 'Guevara', 'cguevara@gmail.com', 'MAT789');
+INSERT INTO Profesional (nombre, apellido, mail, direccion, matricula) VALUES
+('Joaco', 'Jawer', 'jjawer@gmail.com', 'Serrano 750', 'MAT123'),
+('Maru', 'Roitman', 'mroitman@gmail.com', 'Av. Riquelme 123', 'MAT456'),
+('Caro', 'Guevara', 'cguevara@gmail.com', 'Cabrera 234 5to A', 'MAT789');
 
 INSERT INTO Profesional_Especialidad (fkProfesional, fkEspecialidad) VALUES
 (1, 1), (1, 2), -- Joaco tiene 2 especialidades
@@ -125,7 +126,7 @@ INSERT INTO Profesional_Especialidad (fkProfesional, fkEspecialidad) VALUES
 (3, 3);          -- Caro solo Dermatología
 
 INSERT INTO Paciente (nombre, apellido, mail, contrasena, dni, fechaNacimiento, telefono) VALUES
-('Martis', 'Fede', 'mfede@gmail.com', '1234', '44788121', '2003-12-20', '1122445566'),
+('Martis', 'Fede', 'joacojota@gmail.com', '1234', '44788121', '2003-12-20', '1122445566'),
 ('Jorge', 'Lopez', 'jorge.lopez@gmail.com', 'abcd', '00000000', '2000-01-01', '0000000000'),
 ('Mert', 'Mamerto', 'memerto@gmail.com', 'pass', '44232212', '1995-03-27', '1177788899');
 
@@ -172,6 +173,8 @@ INSERT INTO Notificacion (texto, fkTurno, fkPaciente, fechaEnvio, horaEnvio, vis
 */
 
 SET GLOBAL event_scheduler = ON;
+DELIMITER //
+
 CREATE EVENT IF NOT EXISTS actualizar_turnos_cumplidos
 ON SCHEDULE EVERY 1 DAY
 STARTS CURRENT_TIMESTAMP
@@ -181,4 +184,7 @@ BEGIN
     SET fkEstado = (SELECT id FROM Estado WHERE nombre = 'Cumplido')
     WHERE fkEstado = (SELECT id FROM Estado WHERE nombre = 'Reservado')
     AND fecha < CURDATE();
-END$$
+END;
+//
+
+DELIMITER ;
