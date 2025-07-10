@@ -126,9 +126,9 @@ INSERT INTO Profesional_Especialidad (fkProfesional, fkEspecialidad) VALUES
 (3, 3);          -- Caro solo Dermatología
 
 INSERT INTO Paciente (nombre, apellido, mail, contrasena, dni, fechaNacimiento, telefono) VALUES
-('Martis', 'Fede', 'joacojota@gmail.com', '1234', '44788121', '2003-12-20', '1122445566'),
-('Jorge', 'Lopez', 'jorge.lopez@gmail.com', 'abcd', '00000000', '2000-01-01', '0000000000'),
-('Mert', 'Mamerto', 'memerto@gmail.com', 'pass', '44232212', '1995-03-27', '1177788899');
+('Jorge', 'Lopez', 'joacojota@gmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '44788121', '2003-12-20', '1122445566'),
+('Marti', 'Fede', 'martinafedeailen@gmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '00000000', '2000-01-01', '0000000000'),
+('Mert', 'Mamerto', 'roitmanmaru@gmail.com', '03ac674216f3e15c761ee1a5e255f067953623c8b388b4459e13f978d7c846f4', '44232212', '1995-03-27', '1177788899');
 
 INSERT INTO ObraSocial (nombre) VALUES ('OSDE'), ('Swiss Medical'), ('PAMI');
 
@@ -149,17 +149,17 @@ INSERT INTO Turno (fkPaciente, fkProfesional, fkEstado, fecha, hora, notas) VALU
 (1, 3, 1, '2025-04-02', '15:00:00', 'Cancelado por el paciente');
 
 INSERT INTO turno (fkPaciente, fkProfesional, fkEstado, fecha, hora, notas) VALUES
-(null, 1, 4, '2025-07-10', '09:00:00', 'Disponible para consulta general'), -- Dr. Joaco (Cardio/Pediatría)
-(null, 1, 4, '2025-07-12', '10:30:00', 'Turno libre'),
-(null, 1, 4, '2025-07-15', '11:00:00', 'Consulta pediátrica'),
+(null, 1, 4, '2025-08-10', '09:00:00', 'Disponible para consulta general'), -- Dr. Joaco (Cardio/Pediatría)
+(null, 1, 4, '2025-08-12', '10:30:00', 'Turno libre'),
+(null, 1, 4, '2025-08-15', '11:00:00', 'Consulta pediátrica'),
 
-(null, 2, 4, '2025-07-10', '13:00:00', 'Pediatría libre'), -- Dra. Maru (Pediatría)
-(null, 2, 4, '2025-07-14', '14:30:00', 'Chequeo general'),
-(null, 2, 4, '2025-07-20', '15:00:00', 'Control pediátrico'),
+(null, 2, 4, '2025-08-10', '13:00:00', 'Pediatría libre'), -- Dra. Maru (Pediatría)
+(null, 2, 4, '2025-08-14', '14:30:00', 'Chequeo general'),
+(null, 2, 4, '2025-08-20', '15:00:00', 'Control pediátrico'),
 
-(null, 3, 4, '2025-07-11', '08:30:00', 'Dermatología disponible'), -- Dra. Caro (Dermatología)
-(null, 3, 4, '2025-07-13', '10:00:00', 'Consulta dermatológica'),
-(null, 3, 4, '2025-07-16', '11:45:00', 'Atención de rutina');
+(null, 3, 4, '2025-08-11', '08:30:00', 'Dermatología disponible'), -- Dra. Caro (Dermatología)
+(null, 3, 4, '2025-08-13', '10:00:00', 'Consulta dermatológica'),
+(null, 3, 4, '2025-08-16', '11:45:00', 'Atención de rutina');
 
 /*
 -- Inserciones de notificaciones
